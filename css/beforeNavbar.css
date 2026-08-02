@@ -1,0 +1,103 @@
+@font-face {
+  font-family: 'RubikGlitch';
+  src: url('../Assets/fonts/Rubik_Glitch/RubikGlitch-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RubikIso';
+  src: url('../Assets/fonts/Rubik_Iso/RubikIso-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.navbar-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0px auto;
+  padding: 25px 20px;
+  box-sizing: border-box;
+}
+
+.custom-navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: #12131a;
+  border-radius: 50px;
+  padding: 14px 35px;
+  border: 4px solid #fff700;
+  box-shadow: 0px 0px 20px #fff700;
+  height: 80px;
+}
+
+.brand-logo {
+  text-decoration: none;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+#type {
+  font-family: 'RubikGlitch';
+  font-size: 32px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+#mania {
+  font-family: 'RubikIso';
+  font-size: 32px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.navbar-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.signup-text {
+  font-family: 'Inter', sans-serif;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.signup-text:hover {
+  opacity: 0.8;
+}
+
+.user-icon {
+  color: #ffffff;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .custom-navbar {
+    padding: 10px 20px;
+  }
+
+  #type,
+  #mania {
+    font-size: 24px;
+  }
+
+  .signup-text {
+    font-size: 16px;
+  }
+
+  .user-icon {
+    font-size: 24px;
+  }
+}

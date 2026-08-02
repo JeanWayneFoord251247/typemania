@@ -1,0 +1,199 @@
+@font-face {
+  font-family: 'RubikGlitch';
+  src: url('../Assets/fonts/Rubik_Glitch/RubikGlitch-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RubikIso';
+  src: url('../Assets/fonts/Rubik_Iso/RubikIso-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #12131a;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+}
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 0px;
+  padding: 0px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.hero-section {
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 50px 20px 60px 20px;
+  box-sizing: border-box;
+}
+
+.achievements-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.achievements-section .achievements-title {
+  font-family: 'RubikGlitch', cursive, sans-serif;
+  color: #ffffff;
+  font-size: 72px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.hero-title {
+  font-size: 96px;
+  line-height: 1;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-title .type-part {
+  font-family: 'RubikGlitch', cursive, sans-serif;
+  color: #ffffff;
+  letter-spacing: 4px;
+  font-size: 96px;
+}
+
+.hero-title .mania-part {
+  font-family: 'RubikIso', cursive, sans-serif;
+  color: #ffffff;
+  letter-spacing: 4px;
+  font-size: 96px;
+}
+
+.hero-tagline {
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  max-width: 750px;
+  line-height: 32px;
+  margin-bottom: 40px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 26px;
+}
+
+.hero-btn {
+  height: 70px;
+  width: 280px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  line-height: 1;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 2px;
+  padding: 14px 32px;
+  border-radius: 50px;
+  background: #12131a;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.btn-primary-glow {
+  border: 2px solid #f97316;
+  box-shadow: 0px 0px 15px #f97316;
+}
+
+.btn-primary-glow:hover {
+  background: #f97316;
+  color: #12131a;
+  box-shadow: 0px 0px 25px #f97316;
+  transform: translateY(-2px);
+}
+
+.btn-secondary-glow {
+  border: 2px solid #f97316;
+  box-shadow: 0px 0px 15px #f97316;
+}
+
+.btn-secondary-glow:hover {
+  background: #f97316;
+  color: #12131a;
+  box-shadow: 0px 0px 25px #f97316;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .hero-title .type-part,
+  .hero-title .mania-part {
+    font-size: 56px;
+  }
+
+  .achievements-section .achievements-title {
+    font-size: 48px;
+  }
+
+  .hero-tagline {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .hero-btn {
+    width: 100%;
+  }
+
+  .hero-title .type-part,
+  .hero-title .mania-part {
+    font-size: 40px;
+  }
+}

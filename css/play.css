@@ -1,0 +1,166 @@
+@font-face {
+  font-family: 'RubikGlitch';
+  src: url('../Assets/fonts/Rubik_Glitch/RubikGlitch-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FasterOne';
+  src: url('../Assets/fonts/Faster_One/FasterOne-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #12131a;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+.play-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0px auto 100px auto;
+}
+
+.play-title {
+  font-family: 'RubikGlitch', cursive, sans-serif;
+  color: #ffffff;
+  font-size: 84px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.challenge-grid {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.challenge-card {
+  flex: 1;
+  min-width: 300px;
+  max-width: 380px;
+  background-color: #12131a;
+  border-radius: 35px;
+  padding: 45px 30px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
+}
+
+/* Mode Accent Colors: Rush (#19EC06), Chase (#FFF700), Race (#F97316) */
+.card-rush {
+  border: 3px solid #19ec06;
+  box-shadow:
+    0px 0px 20px #19ec06,
+    inset 0px 0px 15px rgba(25, 236, 6, 0.2);
+}
+
+.card-chase {
+  border: 3px solid #fff700;
+  box-shadow:
+    0px 0px 20px #fff700,
+    inset 0px 0px 15px rgba(255, 247, 0, 0.2);
+}
+
+.card-race {
+  border: 3px solid #f97316;
+  box-shadow:
+    0px 0px 20px #f97316,
+    inset 0px 0px 15px rgba(249, 115, 22, 0.2);
+}
+
+/* Hover States */
+.challenge-card:hover {
+  transform: translateY(-8px);
+  background-color: #12131a;
+}
+
+.card-rush:hover {
+  box-shadow:
+    0px 0px 35px #19ec06,
+    inset 0px 0px 25px rgba(25, 236, 6, 0.3);
+}
+
+.card-chase:hover {
+  box-shadow:
+    0px 0px 35px #fff700,
+    inset 0px 0px 25px rgba(255, 247, 0, 0.3);
+}
+
+.card-race:hover {
+  box-shadow:
+    0px 0px 35px #f97316,
+    inset 0px 0px 25px rgba(249, 115, 22, 0.3);
+}
+
+.card-title {
+  font-family: 'RubikGlitch', cursive, sans-serif;
+  color: #ffffff;
+  font-size: 38px;
+  letter-spacing: 3px;
+  margin-bottom: 24px;
+}
+
+.card-description {
+  font-family: 'Inter', sans-serif;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  margin: 0px;
+  opacity: 0.9;
+}
+
+@media (max-width: 992px) {
+  .play-title {
+    font-size: 56px;
+  }
+
+  .challenge-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .challenge-card {
+    width: 100%;
+    max-width: 450px;
+  }
+}
+
+@media (max-width: 576px) {
+  .play-title {
+    font-size: 40px;
+  }
+}

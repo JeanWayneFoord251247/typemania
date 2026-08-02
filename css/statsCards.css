@@ -1,0 +1,243 @@
+@font-face {
+  font-family: "FasterOne";
+  src: url("../Assets/fonts/Faster_One/FasterOne-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../Assets/fonts/Inter/Inter-VariableFont_opsz\,wght.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "RubikGlitch";
+  src: url("../Assets/fonts/Rubik_Glitch/RubikGlitch-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #12131A;
+  color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+.stats-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 90%;
+  max-width: 850px;
+  margin: 40px auto 100px auto;
+}
+
+.stat-card {
+  min-height: 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #12131A;
+  border-radius: 28px;
+  padding: 24px 35px;
+  border: 3px solid var(--accent-color, #FFF700);
+  box-shadow: 0px 0px 20px var(--glow-color, #FFF700);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 0px 28px var(--glow-color, #FFF700);
+}
+
+.stat-card.neon-lime {
+  --accent-color: #19EC06;
+  --glow-color: #19EC06;
+}
+
+.stat-card.neon-yellow {
+  --accent-color: #FFF700;
+  --glow-color: #FFF700;
+}
+
+.stat-card.neon-orange {
+  --accent-color: #F97316;
+  --glow-color: #F97316;
+}
+
+.stat-card-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 12px;
+  max-width: 65%;
+}
+
+.stat-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0px;
+  letter-spacing: 0.5px;
+  text-align: left;
+}
+
+.stat-badges {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Base Badge Rules */
+.badge {
+  font-weight: 700;
+  font-size: 14px;
+  padding: 4px 16px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.mode-badge {
+  font-family: 'RubikGlitch', cursive, sans-serif !important;
+  font-weight: normal !important;
+  background-color: #19EC06;
+  color: #FFFFFF
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mode-badge .game {
+  font-family: 'FasterOne', cursive, sans-serif !important;
+  font-weight: normal !important;
+  font-size: 14px;
+  color: inherit;
+}
+
+.multiplier-badge {
+  background-color: #FFF700;
+  color: #12131A;
+  font-weight: 800;
+}
+
+.badge-red {
+  background-color: #FF0000 !important;
+  color: #FFFFFF !important;
+}
+
+.badge-orange {
+  background-color: #F97316 !important;
+  color: #FFFFFF !important;
+}
+
+.badge-green {
+  background-color: #19EC06 !important;
+  color: #12131A !important;
+}
+
+.stat-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #FFFFFF;
+  opacity: 0.8;
+  margin: 0px;
+  line-height: 22px;
+}
+
+.stat-card-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 130px;
+}
+
+.stat-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.metric-number {
+  font-family: 'Inter', sans-serif;
+  font-size: 50px;
+  font-weight: 900;
+  color: #FFFFFF;
+}
+
+.metric-unit {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+.action-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  background-color: var(--accent-color, #FFF700);
+  color: #12131A;
+  border: none;
+  border-radius: 18px;
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+.action-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+@media (max-width: 650px) {
+  .stat-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px 24px;
+    min-height: auto;
+  }
+
+  .stat-card-left {
+    max-width: 100%;
+  }
+
+  .stat-card-right {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .stat-metric {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .metric-number {
+    font-size: 36px;
+  }
+}
