@@ -68,7 +68,7 @@ if (strlen($clean_name) >= 2) {
                     <div class="avatar-box" style="border-color: <?php echo $circle_color; ?>; box-shadow: 0 0 18px <?php echo $circle_color; ?>;">
                         <span style="color: <?php echo $letter_color; ?>;"><?php echo $avatar_initials; ?></span>
                     </div>
-                    <div class="avatar-edit-badge">✎</div>
+                    <div class="avatar-edit-badge">🖋️</div>
                 </div>
 
                 <div class="user-details">
