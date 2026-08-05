@@ -33,7 +33,8 @@
   height: 80px;
 }
 
-.brand-logo {
+/* Brand Logo */
+.custom-navbar a.brand-logo {
   text-decoration: none;
   line-height: 1;
   display: inline-flex;
@@ -41,7 +42,7 @@
 }
 
 #type {
-  font-family: 'RubikGlitch';
+  font-family: 'RubikGlitch', cursive, sans-serif;
   font-size: 32px;
   color: #ffffff;
   letter-spacing: 2px;
@@ -49,7 +50,7 @@
 }
 
 #mania {
-  font-family: 'RubikIso';
+  font-family: 'RubikIso', cursive, sans-serif;
   font-size: 32px;
   color: #ffffff;
   letter-spacing: 2px;
@@ -63,24 +64,72 @@
   gap: 12px;
 }
 
-.signup-text {
+.custom-navbar .navbar-actions a.signup-text {
   font-family: 'Inter', sans-serif;
   color: #ffffff;
   font-size: 18px;
   font-weight: 600;
   text-decoration: none;
   transition: opacity 0.2s ease;
+  white-space: nowrap;
 }
 
-.signup-text:hover {
+.custom-navbar .navbar-actions a.signup-text:hover {
   opacity: 0.8;
 }
 
-.user-icon {
+.custom-navbar .user-icon {
   color: #ffffff;
   font-size: 28px;
   display: flex;
   align-items: center;
+}
+
+.custom-navbar .navbar-actions a.nav-profile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #ffffff;
+  background: transparent;
+  border: none;
+  outline: none;
+  transition: opacity 0.2s ease;
+}
+
+.custom-navbar .navbar-actions a.nav-profile-link:hover {
+  opacity: 0.85;
+}
+
+.custom-navbar .nav-avatar-mini {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  min-height: 38px;
+  border-radius: 50%;
+  border: 2px solid #00D4FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0d0f14;
+  box-sizing: border-box;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px currentColor;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-navbar .nav-avatar-mini span {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  line-height: 1;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+  transition: color 0.3s ease;
 }
 
 @media (max-width: 768px) {
@@ -93,11 +142,11 @@
     font-size: 24px;
   }
 
-  .signup-text {
+  .custom-navbar .navbar-actions a.signup-text {
     font-size: 16px;
   }
 
-  .user-icon {
+  .custom-navbar .user-icon {
     font-size: 24px;
   }
 }

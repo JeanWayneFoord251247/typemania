@@ -5,12 +5,10 @@ if (session_status() === PHP_SESSION_NONE) {
 
 $currentPage = basename($_SERVER['PHP_SELF']);
 
-// Retrieve customizable session values (with defaults matching your UI)
 $navUsername    = $_SESSION['username'] ?? "TYPEMANIA";
 $navCircleColor = $_SESSION['circle_color'] ?? "#00D4FF";
 $navLetterColor = $_SESSION['letter_color'] ?? "#00D4FF";
 
-// Calculate 2-letter initials dynamically
 $cleanNavName = trim($navUsername);
 if (strlen($cleanNavName) >= 2) {
     $navInitials = strtoupper(substr($cleanNavName, 0, 2));

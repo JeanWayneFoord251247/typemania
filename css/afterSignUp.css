@@ -12,35 +12,34 @@
   font-style: normal;
 }
 
-* {
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
   margin: 0px;
   padding: 0px;
-  box-sizing: border-box;
-}
-
-body {
-  min-height: 100vh;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  width: 100%;
   background-color: #12131a;
   color: #ffffff;
   font-family: 'Inter', sans-serif;
 }
 
-html,
-body {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-  margin: 0px;
-  padding: 0px;
-}
-
 *,
 *::before,
 *::after {
+  margin: 0px;
+  padding: 0px;
   box-sizing: border-box;
+}
+
+.main-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .hero-section {
@@ -53,27 +52,6 @@ body {
   text-align: center;
   padding: 100px 20px 60px 20px;
   box-sizing: border-box;
-}
-
-.achievements-section {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  box-sizing: border-box;
-}
-
-.achievements-section .achievements-title {
-  font-family: 'RubikGlitch', cursive, sans-serif;
-  color: #ffffff;
-  font-size: 72px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  text-align: center;
-  margin-top: 40px;
-  margin-bottom: 30px;
 }
 
 .hero-title {
@@ -120,7 +98,7 @@ body {
   margin-bottom: 26px;
 }
 
-.hero-btn {
+.hero-buttons a.hero-btn {
   height: 70px;
   width: 280px;
   display: inline-flex;
@@ -141,28 +119,88 @@ body {
   box-sizing: border-box;
 }
 
-.btn-primary-glow {
+.hero-buttons a.btn-primary-glow {
   border: 2px solid #f97316;
   box-shadow: 0px 0px 15px #f97316;
 }
 
-.btn-primary-glow:hover {
+.hero-buttons a.btn-primary-glow:hover {
   background: #f97316;
   color: #12131a;
   box-shadow: 0px 0px 25px #f97316;
   transform: translateY(-2px);
 }
 
-.btn-secondary-glow {
+.hero-buttons a.btn-secondary-glow {
   border: 2px solid #f97316;
   box-shadow: 0px 0px 15px #f97316;
 }
 
-.btn-secondary-glow:hover {
+.hero-buttons a.btn-secondary-glow:hover {
   background: #f97316;
   color: #12131a;
   box-shadow: 0px 0px 25px #f97316;
   transform: translateY(-2px);
+}
+
+.quick-tips-card {
+  max-width: 750px;
+  width: 90%;
+  margin: 40px auto 20px auto;
+  padding: 24px 35px;
+  background: #12131a;
+  border-radius: 50px;
+  border: 3px solid #fff700;
+  text-align: center;
+  box-shadow:
+    0px 0px 25px #fff700,
+    inset 0px 0px 15px #fff700;
+  backdrop-filter: blur(5px);
+}
+
+.quick-tips-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.quick-tips-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #ffffff;
+  margin: 0px;
+  line-height: 24px;
+  transition: opacity 0.5s ease-in-out;
+  opacity: 1;
+}
+
+.quick-tips-text.fade-out {
+  opacity: 0;
+}
+
+.achievements-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.achievements-section .achievements-title {
+  font-family: 'RubikGlitch', cursive, sans-serif;
+  color: #ffffff;
+  font-size: 72px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 30px;
 }
 
 @media (max-width: 768px) {
@@ -179,6 +217,19 @@ body {
     font-size: 16px;
     line-height: 24px;
   }
+
+  .quick-tips-card {
+    padding: 18px 20px;
+    border-radius: 30px;
+  }
+
+  .quick-tips-title {
+    font-size: 19px;
+  }
+
+  .quick-tips-text {
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 576px) {
@@ -188,7 +239,7 @@ body {
     max-width: 280px;
   }
 
-  .hero-btn {
+  .hero-buttons a.hero-btn {
     width: 100%;
   }
 

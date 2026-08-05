@@ -44,7 +44,6 @@ body {
   margin-bottom: 60px;
 }
 
-/* Card Container with Cyan theme border & glow */
 .stats-card {
   width: 100%;
   max-width: 850px;
@@ -58,7 +57,6 @@ body {
   gap: 25px;
 }
 
-/* Header & Interactive Avatar Styling */
 .stats-header {
   display: flex;
   align-items: center;
@@ -157,7 +155,6 @@ body {
   margin: 0;
 }
 
-/* Metrics Grid */
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
@@ -191,13 +188,11 @@ body {
   font-size: 36px;
 }
 
-/* Accented Grid Boxes */
 .box-cyan { border: 1px solid #00D4FF; color: #00D4FF; box-shadow: 0 0 10px rgba(0, 212, 255, 0.15); }
 .box-green { border: 1px solid #19EC06; color: #19EC06; box-shadow: 0 0 10px rgba(25, 236, 6, 0.15); }
 .box-yellow { border: 1px solid #FFF700; color: #FFF700; box-shadow: 0 0 10px rgba(255, 247, 0, 0.15); }
 .box-orange { border: 1px solid #F97316; color: #F97316; box-shadow: 0 0 10px rgba(249, 115, 22, 0.15); }
 
-/* Mode Breakdown List */
 .mode-breakdown {
   display: flex;
   flex-direction: column;
@@ -252,7 +247,6 @@ body {
   opacity: 0.6;
 }
 
-/* Action Buttons */
 .stats-actions {
   display: flex;
   justify-content: center;
@@ -298,7 +292,6 @@ body {
   transform: translateY(-2px);
 }
 
-/* Modal Window Styling */
 .custom-modal {
   background-color: #12131a;
   border: 2px solid #00D4FF;
@@ -339,7 +332,6 @@ body {
   box-shadow: 0 0 12px #00D4FF;
 }
 
-/* Multi-Line Wrapping Color Palette Swatches */
 .color-palette {
   display: flex;
   flex-wrap: wrap;
@@ -352,7 +344,6 @@ body {
   cursor: pointer;
 }
 
-/* Hide raw radio circle */
 .color-swatch-label input[type="radio"] {
   position: absolute;
   opacity: 0;
@@ -360,7 +351,6 @@ body {
   height: 0;
 }
 
-/* Swatch visual representation */
 .color-swatch-label .color-swatch {
   display: block;
   width: 34px;
@@ -374,7 +364,6 @@ body {
   transform: scale(1.15);
 }
 
-/* Highlight current active swatch */
 .color-swatch-label input[type="radio"]:checked + .color-swatch {
   border-color: #ffffff;
   box-shadow: 0 0 12px #ffffff;
@@ -399,7 +388,6 @@ body {
   color: #12131a;
 }
 
-/* Responsive Styles */
 @media (max-width: 576px) {
   .stats-card {
     padding: 25px 20px;

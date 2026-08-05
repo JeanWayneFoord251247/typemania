@@ -34,8 +34,8 @@
   position: relative;
 }
 
-.brand-logo {
-  text-decoration: none !important;
+.custom-navbar .brand-logo {
+  text-decoration: none;
   line-height: 1;
   display: inline-flex;
   align-items: center;
@@ -63,19 +63,19 @@
   gap: 55px;
 }
 
-.nav-btn {
+.custom-navbar .nav-btn {
   font-family: 'Inter', sans-serif;
   font-size: 16px;
   font-weight: 600;
   color: #ffffff;
-  text-decoration: none !important;
+  text-decoration: none;
   padding: 8px 20px;
   border-radius: 25px;
   transition: all 0.2s ease;
 }
 
-.nav-btn:hover,
-.nav-btn.active {
+.custom-navbar .nav-btn:hover,
+.custom-navbar .nav-btn.active {
   background: #fff700;
   color: #12131a;
   box-shadow: 0px 0px 10px #fff700;
@@ -88,75 +88,70 @@
   gap: 12px;
 }
 
-/* --- Profile Action Component Styles --- */
-
-.nav-profile-link,
-.nav-profile-link:hover,
-.nav-profile-link:focus,
-.nav-profile-link:active,
-.nav-profile-link:visited {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 12px !important;
-  text-decoration: none !important;
-  color: #ffffff !important;
-  background: transparent !important;
-  border: none !important;
-  outline: none !important;
+.custom-navbar .navbar-actions a.nav-profile-link,
+.custom-navbar .navbar-actions a.nav-profile-link:hover,
+.custom-navbar .navbar-actions a.nav-profile-link:focus,
+.custom-navbar .navbar-actions a.nav-profile-link:active,
+.custom-navbar .navbar-actions a.nav-profile-link:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #ffffff;
+  background: transparent;
+  border: none;
+  outline: none;
   transition: opacity 0.2s ease;
 }
 
-.nav-profile-link:hover {
+.custom-navbar .navbar-actions a.nav-profile-link:hover {
   opacity: 0.85;
 }
 
-/* Circular Avatar Badge */
-.nav-avatar-mini {
-  width: 38px !important;
-  height: 38px !important;
-  min-width: 38px !important;
-  min-height: 38px !important;
-  border-radius: 50% !important;
+.custom-navbar .nav-avatar-mini {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  min-height: 38px;
+  border-radius: 50%;
   border: 2px solid #00D4FF;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  background-color: #0d0f14 !important;
-  box-sizing: border-box !important;
-  overflow: hidden !important;
-  flex-shrink: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0d0f14;
+  box-sizing: border-box;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px currentColor;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Avatar Initials */
-.nav-avatar-mini span {
-  font-family: 'Inter', sans-serif !important;
-  font-weight: 800 !important;
-  font-size: 13px !important;
-  letter-spacing: 0.5px !important;
-  line-height: 1 !important;
-  text-decoration: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  display: block !important;
+.custom-navbar .nav-avatar-mini span {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  line-height: 1;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  display: block;
   transition: color 0.3s ease;
 }
 
-.signup-text {
+.custom-navbar .signup-text {
   font-family: 'Inter', sans-serif;
   color: #ffffff;
   font-size: 18px;
   font-weight: 600;
-  text-decoration: none !important;
+  text-decoration: none;
   transition: opacity 0.2s ease;
   white-space: nowrap;
 }
 
-.signup-text:hover {
+.custom-navbar .signup-text:hover {
   opacity: 0.8;
 }
-
-/* --- Responsive & Mobile Navigation --- */
 
 .nav-toggle,
 .hamburger {
@@ -230,8 +225,6 @@
   }
 }
 
-/* --- Quick Tips Card Component --- */
-
 .quick-tips-card {
   max-width: 750px;
   width: 90%;
@@ -278,15 +271,4 @@
   .quick-tips-text {
     font-size: 14px;
   }
-}
-
-.navbar-actions *,
-.navbar-actions *::before,
-.navbar-actions *::after {
-    text-decoration: none ;
-    box-shadow: none;
-}
-
-.navbar-actions .nav-avatar-mini {
-    box-shadow: 0 0 10px currentColor;
 }

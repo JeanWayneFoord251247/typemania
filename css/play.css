@@ -79,7 +79,6 @@ body {
     background-color 0.3s ease;
 }
 
-/* Mode Accent Colors: Rush (#19EC06), Chase (#FFF700), Race (#F97316) */
 .card-rush {
   border: 3px solid #19ec06;
   box-shadow:
@@ -101,7 +100,6 @@ body {
     inset 0px 0px 15px rgba(249, 115, 22, 0.2);
 }
 
-/* Hover States */
 .challenge-card:hover {
   transform: translateY(-8px);
   background-color: #12131a;

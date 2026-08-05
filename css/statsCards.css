@@ -45,7 +45,7 @@ body {
   margin: 40px auto 100px auto;
 }
 
-.stat-card {
+.stats-cards-container .stat-card {
   min-height: 200px;
   display: flex;
   justify-content: space-between;
@@ -58,27 +58,27 @@ body {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.stat-card:hover {
+.stats-cards-container .stat-card:hover {
   transform: translateY(-2px);
   box-shadow: 0px 0px 28px var(--glow-color, #FFF700);
 }
 
-.stat-card.neon-lime {
+.stats-cards-container .stat-card.neon-lime {
   --accent-color: #19EC06;
   --glow-color: #19EC06;
 }
 
-.stat-card.neon-yellow {
+.stats-cards-container .stat-card.neon-yellow {
   --accent-color: #FFF700;
   --glow-color: #FFF700;
 }
 
-.stat-card.neon-orange {
+.stats-cards-container .stat-card.neon-orange {
   --accent-color: #F97316;
   --glow-color: #F97316;
 }
 
-.stat-card-left {
+.stats-cards-container .stat-card-left {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -87,7 +87,7 @@ body {
   max-width: 65%;
 }
 
-.stat-title {
+.stats-cards-container .stat-title {
   font-family: 'Inter', sans-serif;
   font-size: 26px;
   font-weight: 800;
@@ -97,15 +97,14 @@ body {
   text-align: left;
 }
 
-.stat-badges {
+.stats-cards-container .stat-badges {
   display: flex;
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
 }
 
-/* Base Badge Rules */
-.badge {
+.stats-cards-container .badge {
   font-weight: 700;
   font-size: 14px;
   padding: 4px 16px;
@@ -114,45 +113,45 @@ body {
   letter-spacing: 1px;
 }
 
-.mode-badge {
-  font-family: 'RubikGlitch', cursive, sans-serif !important;
-  font-weight: normal !important;
+.stats-cards-container .mode-badge {
+  font-family: 'RubikGlitch', cursive, sans-serif;
+  font-weight: normal;
   background-color: #19EC06;
-  color: #FFFFFF
+  color: #FFFFFF;
   display: inline-flex;
   align-items: center;
   gap: 6px;
 }
 
-.mode-badge .game {
-  font-family: 'FasterOne', cursive, sans-serif !important;
-  font-weight: normal !important;
+.stats-cards-container .mode-badge .game {
+  font-family: 'FasterOne', cursive, sans-serif;
+  font-weight: normal;
   font-size: 14px;
   color: inherit;
 }
 
-.multiplier-badge {
+.stats-cards-container .multiplier-badge {
   background-color: #FFF700;
   color: #12131A;
   font-weight: 800;
 }
 
-.badge-red {
-  background-color: #FF0000 !important;
-  color: #FFFFFF !important;
+.stats-cards-container .badge.badge-red {
+  background-color: #FF0000;
+  color: #FFFFFF;
 }
 
-.badge-orange {
-  background-color: #F97316 !important;
-  color: #FFFFFF !important;
+.stats-cards-container .badge.badge-orange {
+  background-color: #F97316;
+  color: #FFFFFF;
 }
 
-.badge-green {
-  background-color: #19EC06 !important;
-  color: #12131A !important;
+.stats-cards-container .badge.badge-green {
+  background-color: #19EC06;
+  color: #12131A;
 }
 
-.stat-description {
+.stats-cards-container .stat-description {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   color: #FFFFFF;
@@ -161,7 +160,7 @@ body {
   line-height: 22px;
 }
 
-.stat-card-right {
+.stats-cards-container .stat-card-right {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -170,21 +169,21 @@ body {
   min-width: 130px;
 }
 
-.stat-metric {
+.stats-cards-container .stat-metric {
   display: flex;
   flex-direction: column;
   align-items: center;
   line-height: 1;
 }
 
-.metric-number {
+.stats-cards-container .metric-number {
   font-family: 'Inter', sans-serif;
   font-size: 50px;
   font-weight: 900;
   color: #FFFFFF;
 }
 
-.metric-unit {
+.stats-cards-container .metric-unit {
   font-family: 'Inter', sans-serif;
   font-size: 15px;
   font-weight: 800;
@@ -194,7 +193,7 @@ body {
   margin-top: 4px;
 }
 
-.action-btn {
+.stats-cards-container .action-btn {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 700;
@@ -207,13 +206,13 @@ body {
   transition: opacity 0.2s ease, transform 0.1s ease;
 }
 
-.action-btn:hover {
+.stats-cards-container .action-btn:hover {
   opacity: 0.9;
   transform: scale(1.05);
 }
 
 @media (max-width: 650px) {
-  .stat-card {
+  .stats-cards-container .stat-card {
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
@@ -221,23 +220,23 @@ body {
     min-height: auto;
   }
 
-  .stat-card-left {
+  .stats-cards-container .stat-card-left {
     max-width: 100%;
   }
 
-  .stat-card-right {
+  .stats-cards-container .stat-card-right {
     width: 100%;
     flex-direction: row;
     justify-content: space-between;
   }
 
-  .stat-metric {
+  .stats-cards-container .stat-metric {
     flex-direction: row;
     align-items: baseline;
     gap: 8px;
   }
 
-  .metric-number {
+  .stats-cards-container .metric-number {
     font-size: 36px;
   }
 }
