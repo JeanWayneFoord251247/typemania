@@ -9,7 +9,7 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #F97316 35%, #00D4F
     <title>TypeMania - Sign Up</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/signUp.css">
+    <link rel="stylesheet" href="../css/signUp.css?v=<?php echo time(); ?>">
 </head>
 <body style="<?php echo $bg_style; ?>">
 

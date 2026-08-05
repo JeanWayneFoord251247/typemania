@@ -38,6 +38,13 @@
   gap: 12px;
 }
 
+.custom-footer .brand-logo,
+.custom-footer .brand-col a,
+.custom-footer a.brand-logo {
+  text-decoration: none;
+  display: inline-block;
+}
+
 .custom-footer .brand-col {
   max-width: 280px;
   margin-top: 30px;
@@ -57,7 +64,9 @@
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .custom-footer .mode-link .type {
@@ -117,7 +126,9 @@
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
   margin-top: 5px;
 }
 
