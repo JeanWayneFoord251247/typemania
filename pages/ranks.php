@@ -68,11 +68,11 @@ $dynamicTabsStyle = "style=\"border-color: {$currentConfig['border']}; box-shado
 
     <main class="ranks-container">
         
-        <div class="mode-tabs-wrapper">
+       <div class="mode-tabs-wrapper">
             <div class="mode-tabs" <?php echo $dynamicTabsStyle; ?>>
-                <a href="ranks.php?mode=rush" class="tab-btn <?php echo $mode === 'rush' ? 'active' : ''; ?>" <?php echo $mode === 'rush' ? "style=\"border: 2px solid {$currentConfig['border']}; box-shadow: 0 0 12px {$currentConfig['glow']}; background: {$currentConfig['bgGlow']};\"" : ''; ?>>TYPERUSH</a>
-                <a href="ranks.php?mode=chase" class="tab-btn <?php echo $mode === 'chase' ? 'active' : ''; ?>" <?php echo $mode === 'chase' ? "style=\"border: 2px solid {$currentConfig['border']}; box-shadow: 0 0 12px {$currentConfig['glow']}; background: {$currentConfig['bgGlow']};\"" : ''; ?>>TYPECHASE</a>
-                <a href="ranks.php?mode=race" class="tab-btn <?php echo $mode === 'race' ? 'active' : ''; ?>" <?php echo $mode === 'race' ? "style=\"border: 2px solid {$currentConfig['border']}; box-shadow: 0 0 12px {$currentConfig['glow']}; background: {$currentConfig['bgGlow']};\"" : ''; ?>>TYPERACE</a>
+                <a href="ranks.php?mode=rush" class="tab-btn <?php echo $mode === 'rush' ? 'active' : ''; ?>" <?php echo $mode === 'rush' ? "style=\"border: 2px solid {$currentConfig['border']}; box-shadow: 0 0 12px {$currentConfig['glow']}; background: {$currentConfig['bgGlow']};\"" : ''; ?>><span class="font-type">TYPE</span><span class="font-mode" <?php echo $mode === 'rush' ? "style=\"color: {$currentConfig['border']};\"" : ''; ?>>RUSH</span></a>
+                <a href="ranks.php?mode=chase" class="tab-btn <?php echo $mode === 'chase' ? 'active' : ''; ?>" <?php echo $mode === 'chase' ? "style=\"border: 2px solid {$currentConfig['border']}; box-shadow: 0 0 12px {$currentConfig['glow']}; background: {$currentConfig['bgGlow']};\"" : ''; ?>><span class="font-type">TYPE</span><span class="font-mode" <?php echo $mode === 'chase' ? "style=\"color: {$currentConfig['border']};\"" : ''; ?>>CHASE</span></a>
+                <a href="ranks.php?mode=race" class="tab-btn <?php echo $mode === 'race' ? 'active' : ''; ?>" <?php echo $mode === 'race' ? "style=\"border: 2px solid {$currentConfig['border']}; box-shadow: 0 0 12px {$currentConfig['glow']}; background: {$currentConfig['bgGlow']};\"" : ''; ?>><span class="font-type">TYPE</span><span class="font-mode" <?php echo $mode === 'race' ? "style=\"color: {$currentConfig['border']};\"" : ''; ?>>RACE</span></a>
             </div>
         </div>
 

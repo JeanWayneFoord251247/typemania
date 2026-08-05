@@ -12,6 +12,15 @@
   font-style: normal;
 }
 
+.tab-btn .font-type {
+    font-family: 'RubikGlitch', sans-serif;
+}
+
+.tab-btn .font-mode {
+    font-family: 'FasterOne', cursive;
+    font-size: 23px;
+}
+
 .custom-footer {
   width: 100%;
   background: #12131a;
