@@ -21,7 +21,6 @@ $valid_letter_colors = [
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['username']) && !empty(trim($_POST['username']))) {
-        // Sanitize and save to session
         $username = substr(trim(strip_tags($_POST['username'])), 0, 16);
         $_SESSION['username'] = $username;
     }

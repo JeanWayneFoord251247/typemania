@@ -184,8 +184,9 @@ body {
 }
 
 .metric-value {
-  font-family: 'RubikGlitch', cursive, sans-serif;
+  font-family: 'Inter';
   font-size: 36px;
+
 }
 
 .box-cyan { border: 1px solid #00D4FF; color: #00D4FF; box-shadow: 0 0 10px rgba(0, 212, 255, 0.15); }
@@ -200,7 +201,7 @@ body {
 }
 
 .section-title {
-  font-family: 'RubikGlitch', cursive, sans-serif;
+  font-family: 'RubikGlitch';
   font-size: 22px;
   color: #ffffff;
   margin-bottom: 5px;

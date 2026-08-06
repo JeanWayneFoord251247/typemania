@@ -45,8 +45,8 @@ $quick_tips = [
             </p>
 
             <div class="hero-buttons">
-                <a href="./pages/signUp.php" class="hero-btn btn-primary-glow">PLAY</a>
-                <a href="./ranks.php" class="hero-btn btn-secondary-glow">VIEW RANKS</a>
+                <a href="../pages/play.php" class="hero-btn btn-primary-glow">PLAY</a>
+                <a href="../pages/ranks.php" class="hero-btn btn-secondary-glow">VIEW RANKS</a>
             </div>
 
             <div class="quick-tips-card">

@@ -25,7 +25,7 @@ body {
   width: 100%;
   background-color: #12131a;
   color: #ffffff;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter';
 }
 
 html,
@@ -53,6 +53,7 @@ body {
   text-align: center;
   padding: 0px 20px 60px 20px;
   box-sizing: border-box;
+  margin-bottom: 20px;
 }
 
 .hero-title {
@@ -68,14 +69,14 @@ body {
 }
 
 .hero-title .type-part {
-  font-family: 'RubikGlitch', cursive, sans-serif;
+  font-family: 'RubikGlitch';
   color: #ffffff;
   letter-spacing: 4px;
   font-size: 96px;
 }
 
 .hero-title .mania-part {
-  font-family: 'RubikIso', cursive, sans-serif;
+  font-family: 'RubikIso';
   color: #ffffff;
   letter-spacing: 4px;
   font-size: 96px;
@@ -83,7 +84,7 @@ body {
 
 .hero-tagline {
   color: #ffffff;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter';
   font-size: 22px;
   font-weight: 500;
   max-width: 750px;
@@ -107,7 +108,7 @@ body {
   text-align: center;
   line-height: 1;
   text-decoration: none;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter';
   font-weight: 800;
   font-size: 16px;
   letter-spacing: 2px;
