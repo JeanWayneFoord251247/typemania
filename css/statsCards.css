@@ -74,8 +74,8 @@ body {
 }
 
 .stats-cards-container .stat-card.neon-orange {
-  --accent-color: #F97316;
-  --glow-color: #F97316;
+  --accent-color: #ff9142;
+  --glow-color: #ff9142;
 }
 
 .stats-cards-container .stat-card-left {
@@ -142,7 +142,7 @@ body {
 }
 
 .stats-cards-container .badge.badge-orange {
-  background-color: #F97316;
+  background-color: #ff9142;
   color: #FFFFFF;
 }
 

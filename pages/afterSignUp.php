@@ -1,5 +1,5 @@
 <?php
-$bg_style = "background: linear-gradient(115deg, #00D4FF 0%, #19EC06 35%, #FFF700 60%, #F97316 100%);";
+$bg_style = "background: linear-gradient(115deg, #00D4FF 0%, #19EC06 35%, #FFF700 60%, #ff9142 100%);";
 $quick_tips = [
     "Focus on accuracy over raw speed! Fewer mistakes mean higher combo multipliers and a better overall WPM score.",
     "Keep your eyes ahead of what you are typing! Anticipating the next word prevents stuttering and maintains rhythm.",

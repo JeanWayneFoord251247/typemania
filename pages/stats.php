@@ -3,19 +3,19 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$bg_style = "background: linear-gradient(115deg, #00D4FF 0%, #19EC06 35%, #FFF700 60%, #F97316 100%);";
+$bg_style = "background: linear-gradient(115deg, #00D4FF 0%, #19EC06 35%, #FFF700 60%, #ff9142 100%);";
 
 $username     = $_SESSION['username'] ?? "TYPEMANIA";
 $circle_color = $_SESSION['circle_color'] ?? "#00D4FF";
 $letter_color = $_SESSION['letter_color'] ?? "#00D4FF";
 
 $valid_circle_colors = [
-    '#00D4FF', '#19EC06', '#FFF700', '#F97316', 
+    '#00D4FF', '#19EC06', '#FFF700', '#ff9142', 
     '#A855F7', '#EC4899', '#EF4444', '#3B82F6', '#FFFFFF'
 ];
 
 $valid_letter_colors = [
-    '#00D4FF', '#19EC06', '#FFF700', '#F97316', 
+    '#00D4FF', '#19EC06', '#FFF700', '#ff9142', 
     '#A855F7', '#EC4899', '#EF4444', '#FFFFFF', '#12131A'
 ];
 

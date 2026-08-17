@@ -1,5 +1,5 @@
 <?php
-$bg_style = "background: linear-gradient(115deg, #00D4FF 0%, #19EC06 35%, #FFF700 60%, #F97316 100%);";
+$bg_style = "background: linear-gradient(115deg, #00D4FF 0%, #19EC06 35%, #FFF700 60%, #ff9142 100%);";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +28,6 @@ $bg_style = "background: linear-gradient(115deg, #00D4FF 0%, #19EC06 35%, #FFF70
 
             <div class="hero-buttons">
                 <a href="./pages/signUp.php" class="hero-btn btn-primary-glow">START TYPING NOW</a>
-                <a href="./ranks.php" class="hero-btn btn-secondary-glow">RANKS</a>
             </div>
         </section>
     </main>

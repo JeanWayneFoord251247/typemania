@@ -120,26 +120,26 @@ body {
 }
 
 .hero-buttons a.btn-primary-glow {
-  border: 2px solid #f97316;
-  box-shadow: 0px 0px 15px #f97316;
+  border: 2px solid #ff9142;
+  box-shadow: 0px 0px 15px #ff9142;
 }
 
 .hero-buttons a.btn-primary-glow:hover {
-  background: #f97316;
+  background: #ff9142;
   color: #12131a;
-  box-shadow: 0px 0px 25px #f97316;
+  box-shadow: 0px 0px 25px #ff9142;
   transform: translateY(-2px);
 }
 
 .hero-buttons a.btn-secondary-glow {
-  border: 2px solid #f97316;
-  box-shadow: 0px 0px 15px #f97316;
+  border: 2px solid #ff9142;
+  box-shadow: 0px 0px 15px #ff9142;
 }
 
 .hero-buttons a.btn-secondary-glow:hover {
-  background: #f97316;
+  background: #ff9142;
   color: #12131a;
-  box-shadow: 0px 0px 25px #f97316;
+  box-shadow: 0px 0px 25px #ff9142;
   transform: translateY(-2px);
 }
 

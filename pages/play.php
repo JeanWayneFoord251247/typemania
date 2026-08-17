@@ -1,5 +1,5 @@
 <?php
-$bg_style = "background: linear-gradient(115deg, #00D4FF 0%, #19EC06 35%, #FFF700 60%, #F97316 100%);";
+$bg_style = "background: linear-gradient(115deg, #00D4FF 0%, #19EC06 35%, #FFF700 60%, #ff9142 100%);";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +21,7 @@ $bg_style = "background: linear-gradient(115deg, #00D4FF 0%, #19EC06 35%, #FFF70
 
         <div class="challenge-grid">
 
-            <a href="./game.php?mode=rush" class="challenge-card card-rush">
+            <a href="./difficulty.php?mode=rush" class="challenge-card card-rush">
                 <div class="card-content">
                     <h2 class="card-title">TYPE<span class="highlight">RUSH</span></h2>
                     <p class="card-description">
@@ -30,7 +30,7 @@ $bg_style = "background: linear-gradient(115deg, #00D4FF 0%, #19EC06 35%, #FFF70
                 </div>
             </a>
 
-            <a href="./game.php?mode=chase" class="challenge-card card-chase">
+            <a href="./difficulty.php?mode=chase" class="challenge-card card-chase">
                 <div class="card-content">
                     <h2 class="card-title">TYPE<span class="highlight">CHASE</span></h2>
                     <p class="card-description">
@@ -39,7 +39,7 @@ $bg_style = "background: linear-gradient(115deg, #00D4FF 0%, #19EC06 35%, #FFF70
                 </div>
             </a>
 
-            <a href="./game.php?mode=race" class="challenge-card card-race">
+            <a href="./difficulty.php?mode=race" class="challenge-card card-race">
                 <div class="card-content">
                     <h2 class="card-title">TYPE<span class="highlight">RACE</span></h2>
                     <p class="card-description">

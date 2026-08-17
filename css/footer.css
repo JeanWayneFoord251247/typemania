@@ -118,13 +118,13 @@
 
 .custom-footer .mode-race .type,
 .custom-footer .mode-race .mode {
-  color: #f97316;
+  color: #ff9142;
 }
 
 .custom-footer .mode-race:hover .type,
 .custom-footer .mode-race:hover .mode {
-  color: #f97316;
-  text-shadow: 0px 0px 8px #f97316;
+  color: #ff9142;
+  text-shadow: 0px 0px 8px #ff9142;
 }
 
 .custom-footer .link-col a {

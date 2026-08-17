@@ -1,5 +1,5 @@
 <?php
-$bg_style = "background: linear-gradient(115deg, #19EC06 0%, #00D4FF 35%, #F97316 60%, #FFF700 100%);";
+$bg_style = "background: linear-gradient(115deg, #19EC06 0%, #00D4FF 35%, #ff9142 60%, #FFF700 100%);";
 ?>
 <!DOCTYPE html>
 <html lang="en">

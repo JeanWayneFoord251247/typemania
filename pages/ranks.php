@@ -1,6 +1,6 @@
 <?php
 $mode = isset($_GET['mode']) ? strtolower($_GET['mode']) : 'rush';
-$bg_style = "background: linear-gradient(115deg, #F97316 0%, #FFF700 35%, #19EC06 60%, #00D4FF 100%);";
+$bg_style = "background: linear-gradient(115deg, #ff9142 0%, #FFF700 35%, #19EC06 60%, #00D4FF 100%);";
 
 $modeConfigs = [
     'rush' => [
@@ -32,7 +32,7 @@ $modeConfigs = [
         'userRank' => ['#28', 'Username#25648', '95', '7,450', '2,150m']
     ],
     'race' => [
-        'border'  => '#F97316',
+        'border'  => '#ff9142',
         'glow'    => 'rgba(249, 115, 22, 0.4)',
         'bgGlow'  => 'rgba(249, 115, 22, 0.15)',
         'headers' => ['RANK', 'PLAYER', 'WPM', 'POINTS', 'FINISH TIME'],
