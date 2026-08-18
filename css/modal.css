@@ -1,0 +1,84 @@
+.game-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.game-modal-card {
+  background-color: #12131a;
+  border-radius: 35px;
+  padding: 45px 50px;
+  text-align: center;
+  max-width: 520px;
+  width: 90%;
+  box-sizing: border-box;
+}
+
+.modal-heading {
+  font-family: 'Rubik Glitch', cursive, sans-serif;
+  font-size: 38px;
+  color: #ffffff;
+  letter-spacing: 3px;
+  margin: 0 0 10px 0;
+}
+
+.modal-body-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: #8c96a8;
+  margin: 0 0 28px 0;
+  font-weight: 500;
+}
+
+.modal-stat-item:not(:last-child) {
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.stat-big {
+  font-family: 'Inter', sans-serif;
+  font-size: 26px;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.stat-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #718096;
+  margin-top: 6px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.modal-stats-grid {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 18px 12px;
+  margin-bottom: 30px;
+}
+
+.modal-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}

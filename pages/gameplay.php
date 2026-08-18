@@ -78,7 +78,7 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
             </div>
         </div>
 
-        <?php include './Components/modal.php'; ?>
+        <?php include __DIR__ . '/../Components/modal.php'; ?>
 
     </main>
 
@@ -88,212 +88,195 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
         const GAME_DIFFICULTY = "<?php echo $difficulty; ?>";
         const THEME_COLOR = "<?php echo $active_theme['color']; ?>";
 
-
         const passages = [
-    "To Truly Master The Mechanics Of Real-Time Typography, One Must Transcend Basic Muscle Memory And Embrace Absolute, Unyielding Accuracy.",
-    "A Single Momentary Lapse In Concentration, A Slip On A Semicolon, Or A Misjudged Dash Will Instantly Terminate Your Winning Streak!",
-    "Do Not Succumb To The Immense Pressure Of The Ticking Clock; Instead, Channel Your Inner Velocity And Strike Each Key With Precision."
-];
+            "To Truly Master The Mechanics Of Real-Time Typography, One Must Transcend Basic Muscle Memory And Embrace Absolute, Unyielding Accuracy.",
+            "A Single Momentary Lapse In Concentration, A Slip On A Semicolon, Or A Misjudged Dash Will Instantly Terminate Your Winning Streak!",
+            "Do Not Succumb To The Immense Pressure Of The Ticking Clock; Instead, Channel Your Inner Velocity And Strike Each Key With Precision."
+        ];
 
-const textDisplay = document.getElementById('text-display');
-const typeInput = document.getElementById('type-input');
-const countdownOverlay = document.getElementById('countdown-overlay');
-const countdownNumber = document.getElementById('countdown-number');
-let countdownVal = 3;
-let gameTimerInterval = null;
-const statAccuracy = document.getElementById('stat-accuracy');
-const statWpm = document.getElementById('stat-wpm');
-const statMultiplier = document.getElementById('stat-multiplier');
-let startTime = null;
-let chaserIndex = -6; 
-let maxLives = 5;
-let currentLives = 5;
-let prevInputLength = 0;
-const livesIndicator = document.getElementById('passage-progress');
-let timeLeft = 60;
-const timerElement = document.getElementById('game-timer');
-let chaserInterval = null;
-let totalCharsTyped = 0;
-let currentPassageIndex = 0;
+        let currentPassageIndex = 0;
+        let totalCharsTyped = 0;
+        let prevInputLength = 0;
+        let startTime = null;
+        let timeLeft = 60;
+        let currentLives = 5;
+        const maxLives = 5;
+        let chaserIndex = -6;
+        let gameTimerInterval = null;
+        let chaserInterval = null;
 
-function renderPassage(index) {
-    textDisplay.innerHTML = '';
-    const text = passages[index];
-    text.split('').forEach((char, i) => {
-        const span = document.createElement('span');
-        span.innerText = char;
-        if (i === 0) span.classList.add('char-current');
-        textDisplay.appendChild(span);
-    });
-};
+        const textDisplay = document.getElementById('text-display');
+        const typeInput = document.getElementById('type-input');
+        const countdownOverlay = document.getElementById('countdown-overlay');
+        const countdownNumber = document.getElementById('countdown-number');
+        const timerElement = document.getElementById('game-timer');
+        const livesIndicator = document.getElementById('passage-progress');
+        const statAccuracy = document.getElementById('stat-accuracy');
+        const statWpm = document.getElementById('stat-wpm');
+        const statMultiplier = document.getElementById('stat-multiplier');
 
-function startCountdown() {
-    renderPassage(currentPassageIndex);
-    
-    const interval = setInterval(() => {
-        countdownVal--;
-        if (countdownVal > 0) {
-            countdownNumber.innerText = countdownVal;
-        } else if (countdownVal === 0) {
-            countdownNumber.innerText = 'GO!';
-        } else {
-            clearInterval(interval);
-            countdownOverlay.style.display = 'none';
-            typeInput.disabled = false;
-            typeInput.focus();
-            startGame();
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
         }
-    }, 1000);
-};
 
-function formatTime(seconds) {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
-};
+        function renderPassage(index) {
+            textDisplay.innerHTML = '';
+            const text = passages[index];
+            text.split('').forEach((char, i) => {
+                const span = document.createElement('span');
+                span.innerText = char;
+                if (i === 0) span.classList.add('char-current');
+                textDisplay.appendChild(span);
+            });
+        }
 
-function startGame() {
-    if (GAME_MODE !== 'chase') {
-        timerElement.innerText = formatTime(timeLeft);
-        gameTimerInterval = setInterval(() => {
-            timeLeft--;
-            timerElement.innerText = formatTime(timeLeft);
-            if (timeLeft <= 0) {
-                clearInterval(gameTimerInterval);
-                typeInput.disabled = true;
-                showEndModal("TIME'S UP", "You ran out of time before completing the challenge.");
-            }
-        }, 1000);
-    }
-
-    if (GAME_MODE === 'chase') {
-        const chaserSpeeds = { 'easy': 400, 'medium': 250, 'hard': 150 };
-        const speed = chaserSpeeds[GAME_DIFFICULTY] || 300;
-
-        chaserInterval = setInterval(() => {
-            chaserIndex++;
-            const spans = textDisplay.querySelectorAll('span');
+        function startCountdown() {
+            renderPassage(currentPassageIndex);
+            let count = 3;
             
-            if (chaserIndex >= 0 && chaserIndex < spans.length) {
-                spans[chaserIndex].classList.add('char-chased');
+            const interval = setInterval(() => {
+                count--;
+                if (count > 0) {
+                    countdownNumber.innerText = count;
+                } else if (count === 0) {
+                    countdownNumber.innerText = 'GO!';
+                } else {
+                    clearInterval(interval);
+                    countdownOverlay.style.display = 'none';
+                    typeInput.disabled = false;
+                    typeInput.focus();
+                    startGame();
+                }
+            }, 1000);
+        }
+
+        function startGame() {
+            if (GAME_MODE !== 'chase') {
+                timerElement.innerText = formatTime(timeLeft);
+                gameTimerInterval = setInterval(() => {
+                    timeLeft--;
+                    timerElement.innerText = formatTime(timeLeft);
+                    if (timeLeft <= 0) {
+                        clearInterval(gameTimerInterval);
+                        typeInput.disabled = true;
+                        showEndModal("TIME'S UP", "You ran out of time before completing the challenge.");
+                    }
+                }, 1000);
             }
 
-            if (chaserIndex >= typeInput.value.length) {
-                clearInterval(chaserInterval);
-                typeInput.disabled = true;
-                showEndModal("ELIMINATED", "The chaser caught up to you!");
-            }
-        }, speed);
-    }
-}
+            if (GAME_MODE === 'chase') {
+                const chaserSpeeds = { 'easy': 400, 'medium': 250, 'hard': 150 };
+                const speed = chaserSpeeds[GAME_DIFFICULTY] || 300;
 
-function updateMetrics(typedLength) {
-    const elapsedMinutes = (Date.now() - startTime) / 60000;
-    const wpm = elapsedMinutes > 0 ? Math.round((typedLength / 5) / elapsedMinutes) : 0;
-    statWpm.innerText = wpm;
-};
+                chaserInterval = setInterval(() => {
+                    chaserIndex++;
+                    const spans = textDisplay.querySelectorAll('span');
+                    
+                    if (chaserIndex >= 0 && chaserIndex < spans.length) {
+                        spans[chaserIndex].classList.add('char-chased');
+                    }
 
-typeInput.addEventListener('input', () => {
-    if (!startTime) startTime = Date.now();
-    const spans = textDisplay.querySelectorAll('span');
-    const userVal = typeInput.value.split('');
-    let correctCount = 0;
-
-    spans.forEach((span, index) => {
-        const char = userVal[index];
-        span.className = '';
-
-        if (GAME_MODE === 'chase' && index <= chaserIndex) {
-            span.classList.add('char-chased');
-        }
-        if (char == null) {
-            if (index === userVal.length) span.classList.add('char-current');
-        } else if (char === span.innerText) {
-            span.classList.add('char-correct');
-            correctCount++;
-        } else {
-            span.classList.add('char-incorrect');
-        }
-    });
-
-    const totalTypedNow = totalCharsTyped + userVal.length;
-    const totalCorrectNow = totalCharsTyped + correctCount;
-    const acc = totalTypedNow > 0 ? Math.round((totalCorrectNow / totalTypedNow) * 100) : 100;
-    statAccuracy.innerText = `${acc}%`;
-    updateMetrics(totalCorrectNow);
-
-    const lastTypedIndex = userVal.length - 1;
-    if (lastTypedIndex >= 0 && userVal.length > prevInputLength) {
-        const targetChar = spans[lastTypedIndex].innerText;
-        const typedChar = userVal[lastTypedIndex];
-
-        if (typedChar !== targetChar) {
-            currentLives = Math.max(0, currentLives - 1);
-            livesIndicator.innerText = `${currentLives}/${maxLives}`;
-            livesIndicator.style.color = '#FF3B30';
-            setTimeout(() => { livesIndicator.style.color = '#FFFFFF'; }, 200);
-
-            if (currentLives <= 0) {
-                if (gameTimerInterval) clearInterval(gameTimerInterval);
-                if (chaserInterval) clearInterval(chaserInterval);
-                typeInput.disabled = true;
-                showEndModal("OUT OF LIVES", "You made too many mistakes.");
-                return;
+                    if (chaserIndex >= typeInput.value.length) {
+                        clearInterval(chaserInterval);
+                        typeInput.disabled = true;
+                        showEndModal("ELIMINATED", "The chaser caught up to you!");
+                    }
+                }, speed);
             }
         }
-    }
-    prevInputLength = userVal.length;
 
-    // Endless passage progression:
-    if (userVal.length === spans.length && correctCount === spans.length) {
-        totalCharsTyped += spans.length;
-        currentPassageIndex = (currentPassageIndex + 1) % passages.length;
-        typeInput.value = '';
-        prevInputLength = 0;
-        chaserIndex = -6;
-        renderPassage(currentPassageIndex);
-    }
-});
+        function updateMetrics(typedLength) {
+            const elapsedMinutes = (Date.now() - startTime) / 60000;
+            const wpm = elapsedMinutes > 0 ? Math.round((typedLength / 5) / elapsedMinutes) : 0;
+            statWpm.innerText = wpm;
+        }
 
-window.addEventListener('DOMContentLoaded', () => {
-    startCountdown();
-});
+        typeInput.addEventListener('input', () => {
+            if (!startTime) startTime = Date.now();
+            const spans = textDisplay.querySelectorAll('span');
+            const userVal = typeInput.value.split('');
+            let correctCount = 0;
 
-document.getElementById('btn-restart').addEventListener('click', () => {
-    location.reload();
-});
+            spans.forEach((span, index) => {
+                const char = userVal[index];
+                span.className = '';
 
-document.querySelector('.typing-arena').addEventListener('click', () => {
-    if (!typeInput.disabled) typeInput.focus();
-});
+                if (GAME_MODE === 'chase' && index <= chaserIndex) {
+                    span.classList.add('char-chased');
+                }
+                if (char == null) {
+                    if (index === userVal.length) span.classList.add('char-current');
+                } else if (char === span.innerText) {
+                    span.classList.add('char-correct');
+                    correctCount++;
+                } else {
+                    span.classList.add('char-incorrect');
+                }
+            });
 
-typeInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Backspace' || e.key === 'Delete') {
-        e.preventDefault();
-    }
-});
+            const totalTypedNow = totalCharsTyped + userVal.length;
+            const totalCorrectNow = totalCharsTyped + correctCount;
+            const acc = totalTypedNow > 0 ? Math.round((totalCorrectNow / totalTypedNow) * 100) : 100;
+            statAccuracy.innerText = `${acc}%`;
+            updateMetrics(totalCorrectNow);
 
-function populateModeStats(statsContainer) {
+            const lastTypedIndex = userVal.length - 1;
+            if (lastTypedIndex >= 0 && userVal.length > prevInputLength) {
+                const targetChar = spans[lastTypedIndex].innerText;
+                const typedChar = userVal[lastTypedIndex];
+
+                if (typedChar !== targetChar) {
+                    currentLives = Math.max(0, currentLives - 1);
+                    livesIndicator.innerText = `${currentLives}/${maxLives}`;
+                    livesIndicator.style.color = '#FF3B30';
+                    setTimeout(() => { livesIndicator.style.color = '#FFFFFF'; }, 200);
+
+                    if (currentLives <= 0) {
+                        if (gameTimerInterval) clearInterval(gameTimerInterval);
+                        if (chaserInterval) clearInterval(chaserInterval);
+                        typeInput.disabled = true;
+                        showEndModal("OUT OF LIVES", "You made too many mistakes.");
+                        return;
+                    }
+                }
+            }
+            prevInputLength = userVal.length;
+
+            if (userVal.length === spans.length && correctCount === spans.length) {
+                totalCharsTyped += spans.length;
+                currentPassageIndex = (currentPassageIndex + 1) % passages.length;
+                typeInput.value = '';
+                prevInputLength = 0;
+                chaserIndex = -6;
+                renderPassage(currentPassageIndex);
+            }
+        });
+
+        function populateModeStats(statsContainer) {
             const totalWords = Math.round((totalCharsTyped + typeInput.value.length) / 5);
             const finalAccuracy = statAccuracy.innerText;
             const finalWpm = statWpm.innerText;
 
-            if (GAME_MODE === 'chase') {
+            if (GAME_MODE === 'rush') {
+                const peakMultiplier = statMultiplier ? statMultiplier.innerText : '1.0X';
+                statsContainer.innerHTML = `
+                    <div class="modal-stat-item"><span class="stat-big">${totalWords}</span><span class="stat-sub">WORDS CLEARED</span></div>
+                    <div class="modal-stat-item"><span class="stat-big">${finalAccuracy}</span><span class="stat-sub">ACCURACY</span></div>
+                    <div class="modal-stat-item"><span class="stat-big">${peakMultiplier}</span><span class="stat-sub">PEAK MULTIPLIER</span></div>
+                    <div class="modal-stat-item"><span class="stat-big">${finalWpm}</span><span class="stat-sub">WPM</span></div>
+                `;
+            } else if (GAME_MODE === 'chase') {
                 statsContainer.innerHTML = `
                     <div class="modal-stat-item"><span class="stat-big">${totalWords}</span><span class="stat-sub">WORDS TYPED</span></div>
                     <div class="modal-stat-item"><span class="stat-big">${currentLives}/${maxLives}</span><span class="stat-sub">LIVES LEFT</span></div>
                     <div class="modal-stat-item"><span class="stat-big">${finalWpm}</span><span class="stat-sub">PEAK WPM</span></div>
                 `;
-            } else if (GAME_MODE === 'rush') {
-                statsContainer.innerHTML = `
-                    <div class="modal-stat-item"><span class="stat-big">${totalWords}</span><span class="stat-sub">WORDS CLEARED</span></div>
-                    <div class="modal-stat-item"><span class="stat-big">${finalAccuracy}</span><span class="stat-sub">ACCURACY</span></div>
-                    <div class="modal-stat-item"><span class="stat-big">${finalWpm}</span><span class="stat-sub">WPM</span></div>
-                `;
             } else if (GAME_MODE === 'race') {
-                const timeSpent = 60 - timeLeft;
+                const timeSpent = Math.max(1, 60 - timeLeft);
                 statsContainer.innerHTML = `
-                    <div class="modal-stat-item"><span class="stat-big">${timeSpent}s</span><span class="stat-sub">FINISH TIME</span></div>
+                    <div class="modal-stat-item"><span class="stat-big">${timeSpent}s</span><span class="stat-sub">TIME TAKEN</span></div>
                     <div class="modal-stat-item"><span class="stat-big">${finalAccuracy}</span><span class="stat-sub">ACCURACY</span></div>
                     <div class="modal-stat-item"><span class="stat-big">${finalWpm}</span><span class="stat-sub">RACE WPM</span></div>
                 `;
@@ -305,17 +288,28 @@ function populateModeStats(statsContainer) {
             if (chaserInterval) clearInterval(chaserInterval);
             typeInput.disabled = true;
 
+            const modal = document.getElementById('game-modal');
             document.getElementById('modal-title').innerText = title;
             document.getElementById('modal-desc').innerText = description;
             
             const statsContainer = document.getElementById('modal-stats-container');
             populateModeStats(statsContainer);
 
-            document.getElementById('game-modal').style.display = 'flex';
+            modal.style.setProperty('display', 'flex', 'important');
         }
 
-        document.getElementById('modal-btn-retry').addEventListener('click', () => {
-            location.reload();
+        document.getElementById('btn-restart').addEventListener('click', () => location.reload());
+        const modalRetry = document.getElementById('modal-btn-retry');
+        if (modalRetry) modalRetry.addEventListener('click', () => location.reload());
+
+        document.querySelector('.typing-arena').addEventListener('click', () => {
+            if (!typeInput.disabled) typeInput.focus();
+        });
+
+        typeInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Backspace' || e.key === 'Delete') {
+                e.preventDefault();
+            }
         });
 
         window.addEventListener('DOMContentLoaded', () => {
