@@ -23,7 +23,7 @@ $bg_style = "background: linear-gradient(115deg, #00D4FF 0%, #19EC06 35%, #FFF70
 
             <a href="./difficulty.php?mode=rush" class="challenge-card card-rush">
                 <div class="card-content">
-                    <h2 class="card-title">TYPE<span class="highlight">RUSH</span></h2>
+                    <h2 class="card-title">TYPE<span class="highlight-rush">RUSH</span></h2>
                     <p class="card-description">
                         A High-Stakes, Fast-Paced Speed Test. Outrun A Shrinking Timer Where Every Correct Sentence Buys You Extra Seconds To Keep The Rush Going.
                     </p>
@@ -32,7 +32,7 @@ $bg_style = "background: linear-gradient(115deg, #00D4FF 0%, #19EC06 35%, #FFF70
 
             <a href="./difficulty.php?mode=chase" class="challenge-card card-chase">
                 <div class="card-content">
-                    <h2 class="card-title">TYPE<span class="highlight">CHASE</span></h2>
+                    <h2 class="card-title">TYPE<span class="highlight-chase">CHASE</span></h2>
                     <p class="card-description">
                         Stay Ahead Of The Hunter. Maintain A Strict Target WPM To Keep Distance, Let The Pace Slip For Too Long, And The Chase Is Over.
                     </p>
@@ -41,7 +41,7 @@ $bg_style = "background: linear-gradient(115deg, #00D4FF 0%, #19EC06 35%, #FFF70
 
             <a href="./difficulty.php?mode=race" class="challenge-card card-race">
                 <div class="card-content">
-                    <h2 class="card-title">TYPE<span class="highlight">RACE</span></h2>
+                    <h2 class="card-title">TYPE<span class="highlight-race">RACE</span></h2>
                     <p class="card-description">
                         Head-To-Head Competitive Typing. Line Up On The Grid, Hit Top Speed, And Cross The Finish Line First Against Live Rivals Or Ghost Racers.
                     </p>

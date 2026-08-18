@@ -188,7 +188,7 @@
   border: 3px solid #ff9142;
   border-radius: 50px;
   padding: 14px 42px;
-  font-family: 'RubikGlitch', cursive, sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 20px;
   letter-spacing: 2px;
   text-decoration: none;
@@ -199,9 +199,10 @@
 }
 
 .btn-start-match:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 0px 35px #ff9142;
-  color: #ffffff;
+  background: #ff9142;
+  color: #12131a;
+  box-shadow: 0px 0px 25px #ff9142;
+  transform: translateY(-2px);
 }
 
 @media (max-width: 992px) {

@@ -126,11 +126,32 @@ body {
 }
 
 .card-title {
-  font-family: 'RubikGlitch', cursive, sans-serif;
+  font-family: 'RubikGlitch';
   color: #ffffff;
   font-size: 38px;
   letter-spacing: 3px;
   margin-bottom: 24px;
+}
+
+.highlight-rush {
+  font-family: 'FasterOne';
+  color: #19ec06;
+  font-size: 42px;
+  letter-spacing: 3px;
+}
+
+.highlight-chase {
+  font-family: 'FasterOne';
+  color: #fff700;
+  font-size: 42px;
+  letter-spacing: 3px;
+}
+
+.highlight-race {
+  font-family: 'FasterOne';
+  color: #ff9142;
+  font-size: 42px;
+  letter-spacing: 3px;
 }
 
 .card-description {
