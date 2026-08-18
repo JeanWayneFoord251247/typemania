@@ -54,6 +54,7 @@ $dynamicTabsStyle = "style=\"border-color: {$currentConfig['border']}; box-shado
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,13 +63,14 @@ $dynamicTabsStyle = "style=\"border-color: {$currentConfig['border']}; box-shado
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/ranks.css?v=<?php echo time(); ?>">
 </head>
+
 <body style="<?php echo $bg_style; ?>">
 
     <?php include '../Components/afterNavbar.php'; ?>
 
     <main class="ranks-container">
-        
-       <div class="mode-tabs-wrapper">
+
+        <div class="mode-tabs-wrapper">
             <div class="mode-tabs" <?php echo $dynamicTabsStyle; ?>>
                 <a href="ranks.php?mode=rush" class="tab-btn <?php echo $mode === 'rush' ? 'active' : ''; ?>" <?php echo $mode === 'rush' ? "style=\"border: 2px solid {$currentConfig['border']}; box-shadow: 0 0 12px {$currentConfig['glow']}; background: {$currentConfig['bgGlow']};\"" : ''; ?>><span class="font-type">TYPE</span><span class="font-mode" <?php echo $mode === 'rush' ? "style=\"color: {$currentConfig['border']};\"" : ''; ?>>RUSH</span></a>
                 <a href="ranks.php?mode=chase" class="tab-btn <?php echo $mode === 'chase' ? 'active' : ''; ?>" <?php echo $mode === 'chase' ? "style=\"border: 2px solid {$currentConfig['border']}; box-shadow: 0 0 12px {$currentConfig['glow']}; background: {$currentConfig['bgGlow']};\"" : ''; ?>><span class="font-type">TYPE</span><span class="font-mode" <?php echo $mode === 'chase' ? "style=\"color: {$currentConfig['border']};\"" : ''; ?>>CHASE</span></a>
@@ -77,7 +79,7 @@ $dynamicTabsStyle = "style=\"border-color: {$currentConfig['border']}; box-shado
         </div>
 
         <div class="leaderboard-card" <?php echo $dynamicCardStyle; ?>>
-            
+
             <div class="leaderboard-header">
                 <?php foreach ($currentConfig['headers'] as $header): ?>
                     <div class="col-item"><?php echo $header; ?></div>
@@ -100,7 +102,7 @@ $dynamicTabsStyle = "style=\"border-color: {$currentConfig['border']}; box-shado
         <div class="personal-rank-card" <?php echo $dynamicCardStyle; ?>>
             <div class="col-item"><?php echo $currentConfig['userRank'][0]; ?></div>
             <div class="col-item">
-                <?php echo $currentConfig['userRank'][1]; ?> 
+                <?php echo $currentConfig['userRank'][1]; ?>
                 <span class="badge-you" style="color: <?php echo $currentConfig['border']; ?>;">(YOU)</span>
             </div>
             <div class="col-item"><?php echo $currentConfig['userRank'][2]; ?></div>
@@ -114,4 +116,5 @@ $dynamicTabsStyle = "style=\"border-color: {$currentConfig['border']}; box-shado
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

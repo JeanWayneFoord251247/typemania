@@ -1,6 +1,6 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+  session_start();
 }
 
 $currentPage = basename($_SERVER['PHP_SELF']);
@@ -11,11 +11,11 @@ $navLetterColor = $_SESSION['letter_color'] ?? "#00D4FF";
 
 $cleanNavName = trim($navUsername);
 if (strlen($cleanNavName) >= 2) {
-    $navInitials = strtoupper(substr($cleanNavName, 0, 2));
+  $navInitials = strtoupper(substr($cleanNavName, 0, 2));
 } elseif (strlen($cleanNavName) === 1) {
-    $navInitials = strtoupper($cleanNavName) . "_";
+  $navInitials = strtoupper($cleanNavName) . "_";
 } else {
-    $navInitials = "TM";
+  $navInitials = "TM";
 }
 ?>
 

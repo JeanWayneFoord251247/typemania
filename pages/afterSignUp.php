@@ -11,6 +11,7 @@ $quick_tips = [
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,17 +19,19 @@ $quick_tips = [
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/afterSignUp.css?v=<?php echo time(); ?>">
-    
+
     <style>
         .quick-tips-text {
             transition: opacity 0.5s ease-in-out;
             opacity: 1;
         }
+
         .quick-tips-text.fade-out {
             opacity: 0;
         }
     </style>
 </head>
+
 <body style="<?php echo $bg_style; ?>">
 
     <?php include '../Components/afterNavbar.php'; ?>
@@ -67,20 +70,22 @@ $quick_tips = [
     <?php include '../Components/footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <script>
         const tips = <?php echo json_encode($quick_tips); ?>;
         let currentTipIndex = 0;
         const tipElement = document.getElementById('quick-tip-display');
+
         function cycleTip() {
             tipElement.classList.add('fade-out');
             setTimeout(() => {
                 currentTipIndex = (currentTipIndex + 1) % tips.length;
                 tipElement.textContent = tips[currentTipIndex];
                 tipElement.classList.remove('fade-out');
-            }, 500); 
+            }, 500);
         }
         setInterval(cycleTip, 5000);
     </script>
 </body>
+
 </html>

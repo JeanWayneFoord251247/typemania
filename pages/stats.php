@@ -10,13 +10,27 @@ $circle_color = $_SESSION['circle_color'] ?? "#00D4FF";
 $letter_color = $_SESSION['letter_color'] ?? "#00D4FF";
 
 $valid_circle_colors = [
-    '#00D4FF', '#19EC06', '#FFF700', '#ff9142', 
-    '#A855F7', '#EC4899', '#EF4444', '#3B82F6', '#FFFFFF'
+    '#00D4FF',
+    '#19EC06',
+    '#FFF700',
+    '#ff9142',
+    '#A855F7',
+    '#EC4899',
+    '#EF4444',
+    '#3B82F6',
+    '#FFFFFF'
 ];
 
 $valid_letter_colors = [
-    '#00D4FF', '#19EC06', '#FFF700', '#ff9142', 
-    '#A855F7', '#EC4899', '#EF4444', '#FFFFFF', '#12131A'
+    '#00D4FF',
+    '#19EC06',
+    '#FFF700',
+    '#ff9142',
+    '#A855F7',
+    '#EC4899',
+    '#EF4444',
+    '#FFFFFF',
+    '#12131A'
 ];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -24,12 +38,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $username = substr(trim(strip_tags($_POST['username'])), 0, 16);
         $_SESSION['username'] = $username;
     }
-    
+
     if (isset($_POST['circle_color']) && in_array($_POST['circle_color'], $valid_circle_colors)) {
         $circle_color = $_POST['circle_color'];
         $_SESSION['circle_color'] = $circle_color;
     }
-    
+
     if (isset($_POST['letter_color']) && in_array($_POST['letter_color'], $valid_letter_colors)) {
         $letter_color = $_POST['letter_color'];
         $_SESSION['letter_color'] = $letter_color;
@@ -47,6 +61,7 @@ if (strlen($clean_name) >= 2) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,6 +70,7 @@ if (strlen($clean_name) >= 2) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/stats.css?v=<?php echo time(); ?>">
 </head>
+
 <body style="<?php echo $bg_style; ?>">
 
     <?php include '../Components/afterNavbar.php'; ?>
@@ -102,7 +118,7 @@ if (strlen($clean_name) >= 2) {
 
             <div class="mode-breakdown">
                 <h2 class="section-title">MODE PERFORMANCE</h2>
-                
+
                 <div class="mode-row">
                     <div class="mode-info">
                         <span class="mode-name name-green">TYPERUSH</span>
@@ -149,7 +165,7 @@ if (strlen($clean_name) >= 2) {
                     <h5 class="modal-title font-glitch" id="modalLabel">CUSTOMIZE PROFILE</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                
+
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                     <div class="modal-body">
 
@@ -204,31 +220,32 @@ if (strlen($clean_name) >= 2) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const usernameInput = document.getElementById('usernameInput');
-        const previewCircle = document.getElementById('previewCircle');
-        const previewText   = document.getElementById('previewText');
+        document.addEventListener('DOMContentLoaded', () => {
+            const usernameInput = document.getElementById('usernameInput');
+            const previewCircle = document.getElementById('previewCircle');
+            const previewText = document.getElementById('previewText');
 
-        usernameInput?.addEventListener('input', (e) => {
-            const val = e.target.value.trim();
-            if (val.length >= 2) previewText.textContent = val.substring(0, 2).toUpperCase();
-            else if (val.length === 1) previewText.textContent = val.substring(0, 1).toUpperCase() + '_';
-            else previewText.textContent = 'TM';
-        });
+            usernameInput?.addEventListener('input', (e) => {
+                const val = e.target.value.trim();
+                if (val.length >= 2) previewText.textContent = val.substring(0, 2).toUpperCase();
+                else if (val.length === 1) previewText.textContent = val.substring(0, 1).toUpperCase() + '_';
+                else previewText.textContent = 'TM';
+            });
 
-        document.querySelectorAll('input[name="circle_color"]').forEach(radio => {
-            radio.addEventListener('change', (e) => {
-                previewCircle.style.borderColor = e.target.value;
-                previewCircle.style.boxShadow = `0 0 18px ${e.target.value}`;
+            document.querySelectorAll('input[name="circle_color"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    previewCircle.style.borderColor = e.target.value;
+                    previewCircle.style.boxShadow = `0 0 18px ${e.target.value}`;
+                });
+            });
+
+            document.querySelectorAll('input[name="letter_color"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    previewText.style.color = e.target.value;
+                });
             });
         });
-
-        document.querySelectorAll('input[name="letter_color"]').forEach(radio => {
-            radio.addEventListener('change', (e) => {
-                previewText.style.color = e.target.value;
-            });
-        });
-    });
     </script>
 </body>
+
 </html>

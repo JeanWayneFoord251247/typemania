@@ -1,20 +1,20 @@
 @font-face {
-  font-family: "FasterOne";
-  src: url("../Assets/fonts/Faster_One/FasterOne-Regular.ttf") format("truetype");
+  font-family: 'FasterOne';
+  src: url('../Assets/fonts/Faster_One/FasterOne-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Inter";
-  src: url("../Assets/fonts/Inter/Inter-VariableFont_opsz\,wght.ttf") format("truetype");
+  font-family: 'Inter';
+  src: url('../Assets/fonts/Inter/Inter-VariableFont_opsz\,wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "RubikGlitch";
-  src: url("../Assets/fonts/Rubik_Glitch/RubikGlitch-Regular.ttf") format("truetype");
+  font-family: 'RubikGlitch';
+  src: url('../Assets/fonts/Rubik_Glitch/RubikGlitch-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -30,8 +30,8 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: #12131A;
-  color: #FFFFFF;
+  background-color: #12131a;
+  color: #ffffff;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
 }
@@ -50,27 +50,29 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #12131A;
+  background-color: #12131a;
   border-radius: 28px;
   padding: 24px 35px;
-  border: 3px solid var(--accent-color, #FFF700);
-  box-shadow: 0px 0px 20px var(--glow-color, #FFF700);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 3px solid var(--accent-color, #fff700);
+  box-shadow: 0px 0px 20px var(--glow-color, #fff700);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .stats-cards-container .stat-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0px 0px 28px var(--glow-color, #FFF700);
+  box-shadow: 0px 0px 28px var(--glow-color, #fff700);
 }
 
 .stats-cards-container .stat-card.neon-lime {
-  --accent-color: #19EC06;
-  --glow-color: #19EC06;
+  --accent-color: #19ec06;
+  --glow-color: #19ec06;
 }
 
 .stats-cards-container .stat-card.neon-yellow {
-  --accent-color: #FFF700;
-  --glow-color: #FFF700;
+  --accent-color: #fff700;
+  --glow-color: #fff700;
 }
 
 .stats-cards-container .stat-card.neon-orange {
@@ -91,7 +93,7 @@ body {
   font-family: 'Inter', sans-serif;
   font-size: 26px;
   font-weight: 800;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 0px;
   letter-spacing: 0.5px;
   text-align: left;
@@ -116,8 +118,8 @@ body {
 .stats-cards-container .mode-badge {
   font-family: 'RubikGlitch', cursive, sans-serif;
   font-weight: normal;
-  background-color: #19EC06;
-  color: #FFFFFF;
+  background-color: #19ec06;
+  color: #ffffff;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -131,30 +133,30 @@ body {
 }
 
 .stats-cards-container .multiplier-badge {
-  background-color: #FFF700;
-  color: #12131A;
+  background-color: #fff700;
+  color: #12131a;
   font-weight: 800;
 }
 
 .stats-cards-container .badge.badge-red {
-  background-color: #FF0000;
-  color: #FFFFFF;
+  background-color: #ff0000;
+  color: #ffffff;
 }
 
 .stats-cards-container .badge.badge-orange {
   background-color: #ff9142;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .stats-cards-container .badge.badge-green {
-  background-color: #19EC06;
-  color: #12131A;
+  background-color: #19ec06;
+  color: #12131a;
 }
 
 .stats-cards-container .stat-description {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
-  color: #FFFFFF;
+  color: #ffffff;
   opacity: 0.8;
   margin: 0px;
   line-height: 22px;
@@ -180,14 +182,14 @@ body {
   font-family: 'Inter', sans-serif;
   font-size: 50px;
   font-weight: 900;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .stats-cards-container .metric-unit {
   font-family: 'Inter', sans-serif;
   font-size: 15px;
   font-weight: 800;
-  color: #FFFFFF;
+  color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-top: 4px;
@@ -197,13 +199,15 @@ body {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 700;
-  background-color: var(--accent-color, #FFF700);
-  color: #12131A;
+  background-color: var(--accent-color, #fff700);
+  color: #12131a;
   border: none;
   border-radius: 18px;
   padding: 8px 20px;
   cursor: pointer;
-  transition: opacity 0.2s ease, transform 0.1s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.1s ease;
 }
 
 .stats-cards-container .action-btn:hover {

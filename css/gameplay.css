@@ -99,9 +99,9 @@ body {
 
 .game-card {
   width: 60%;
-  background-color: #12131A;
+  background-color: #12131a;
   border-radius: 0 0 35px 35px;
-  border-top: none ;
+  border-top: none;
   padding: 0px 50px 35px 50px;
   display: flex;
   flex-direction: column;
@@ -113,8 +113,8 @@ body {
 }
 
 .timer-badge {
-  background-color: #12131A;
-  border-radius: 1000px ;
+  background-color: #12131a;
+  border-radius: 1000px;
   padding: 10px 48px 14px 48px;
   margin-top: 50px;
   margin-bottom: 24px;
@@ -175,19 +175,19 @@ body {
 }
 
 .char-current {
-  border-bottom: 3px solid var(--theme-color, #FFF700);
-  color: #FFFFFF;
+  border-bottom: 3px solid var(--theme-color, #fff700);
+  color: #ffffff;
 }
 
 .char-incorrect {
-  color: #FF3B30 ;
+  color: #ff3b30;
   background-color: rgba(255, 59, 48, 0.25);
   border-radius: 4px;
   padding: 0 1px;
 }
 
 .char-correct {
-  color: var(--theme-color, #FFF700);
+  color: var(--theme-color, #fff700);
 }
 
 .hidden-input {
@@ -219,7 +219,7 @@ body {
 .watermark-prefix {
   font-family: 'RubikGlitch', sans-serif;
   font-size: 76px;
-  color: #FFFFFF;
+  color: #ffffff;
   letter-spacing: 4px;
 }
 
@@ -240,7 +240,7 @@ body {
   align-items: center;
   width: 100%;
   max-width: 480px;
-  background-color: #12131A;
+  background-color: #12131a;
   border-radius: 35px;
   padding: 14px 32px;
   box-sizing: border-box;

@@ -10,11 +10,11 @@
       <p class="tagline">Where speed meets precision</p>
     </div>
 
-<div class="footer-col modes-col">
-  <a href="#" class="mode-link mode-rush"><span class="type">TYPE</span><span class="mode">RUSH</span></a>
-  <a href="#" class="mode-link mode-chase"><span class="type">TYPE</span><span class="mode">CHASE</span></a>
-  <a href="#" class="mode-link mode-race"><span class="type">TYPE</span><span class="mode">RACE</span></a>
-</div>
+    <div class="footer-col modes-col">
+      <a href="#" class="mode-link mode-rush"><span class="type">TYPE</span><span class="mode">RUSH</span></a>
+      <a href="#" class="mode-link mode-chase"><span class="type">TYPE</span><span class="mode">CHASE</span></a>
+      <a href="#" class="mode-link mode-race"><span class="type">TYPE</span><span class="mode">RACE</span></a>
+    </div>
 
     <div class="footer-col link-col">
       <a href="#">DISCORD</a>

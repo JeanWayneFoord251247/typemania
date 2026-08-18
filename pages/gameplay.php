@@ -23,6 +23,7 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,6 +31,7 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/gameplay.css?v=<?php echo time(); ?>">
 </head>
+
 <body style="<?php echo $bg_style; ?> --theme-color: <?php echo $active_theme['color']; ?>;">
     <div class="game-top-controls">
         <a href="./play.php" class="btn-pill-control" style="border: 2px solid <?php echo $active_theme['color']; ?>; box-shadow: 0px 0px 15px <?php echo $active_theme['color']; ?>80;">CANCEL</a>
@@ -43,7 +45,7 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
     <main class="game-wrapper">
         <div class="game-card" style="border: 3px solid <?php echo $active_theme['color']; ?>; box-shadow: 0px 0px 30px <?php echo $active_theme['color']; ?>;">
 
-        <div class="timer-badge" style="border: 3px solid <?php echo $active_theme['color']; ?>; color: <?php echo $active_theme['color']; ?>; box-shadow: 0px 0px 20px <?php echo $active_theme['color']; ?>80;">
+            <div class="timer-badge" style="border: 3px solid <?php echo $active_theme['color']; ?>; color: <?php echo $active_theme['color']; ?>; box-shadow: 0px 0px 20px <?php echo $active_theme['color']; ?>80;">
                 <span id="game-timer"><?php echo htmlspecialchars($active_theme['timer_label']); ?></span>
             </div>
 
@@ -58,9 +60,9 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
             </div>
 
             <div class="watermark-title">
-    <span class="watermark-prefix">TYPE</span>
-    <span class="watermark-mode"><?php echo strtoupper(htmlspecialchars($mode)); ?></span>
-</div>
+                <span class="watermark-prefix">TYPE</span>
+                <span class="watermark-mode"><?php echo strtoupper(htmlspecialchars($mode)); ?></span>
+            </div>
         </div>
 
         <div class="hud-stats-bar" style="border: 2px solid <?php echo $active_theme['color']; ?>; box-shadow: 0px 0px 20px <?php echo $active_theme['color']; ?>80;">
@@ -83,7 +85,6 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
     </main>
 
     <script>
-
         const GAME_MODE = "<?php echo $mode; ?>";
         const GAME_DIFFICULTY = "<?php echo $difficulty; ?>";
         const THEME_COLOR = "<?php echo $active_theme['color']; ?>";
@@ -135,7 +136,7 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
         function startCountdown() {
             renderPassage(currentPassageIndex);
             let count = 3;
-            
+
             const interval = setInterval(() => {
                 count--;
                 if (count > 0) {
@@ -167,13 +168,17 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
             }
 
             if (GAME_MODE === 'chase') {
-                const chaserSpeeds = { 'easy': 400, 'medium': 250, 'hard': 150 };
+                const chaserSpeeds = {
+                    'easy': 400,
+                    'medium': 250,
+                    'hard': 150
+                };
                 const speed = chaserSpeeds[GAME_DIFFICULTY] || 300;
 
                 chaserInterval = setInterval(() => {
                     chaserIndex++;
                     const spans = textDisplay.querySelectorAll('span');
-                    
+
                     if (chaserIndex >= 0 && chaserIndex < spans.length) {
                         spans[chaserIndex].classList.add('char-chased');
                     }
@@ -231,7 +236,9 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
                     currentLives = Math.max(0, currentLives - 1);
                     livesIndicator.innerText = `${currentLives}/${maxLives}`;
                     livesIndicator.style.color = '#FF3B30';
-                    setTimeout(() => { livesIndicator.style.color = '#FFFFFF'; }, 200);
+                    setTimeout(() => {
+                        livesIndicator.style.color = '#FFFFFF';
+                    }, 200);
 
                     if (currentLives <= 0) {
                         if (gameTimerInterval) clearInterval(gameTimerInterval);
@@ -291,7 +298,7 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
             const modal = document.getElementById('game-modal');
             document.getElementById('modal-title').innerText = title;
             document.getElementById('modal-desc').innerText = description;
-            
+
             const statsContainer = document.getElementById('modal-stats-container');
             populateModeStats(statsContainer);
 
@@ -315,7 +322,7 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
         window.addEventListener('DOMContentLoaded', () => {
             startCountdown();
         });
-
-</script>
+    </script>
 </body>
+
 </html>

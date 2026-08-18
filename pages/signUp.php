@@ -3,14 +3,16 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #ff9142 35%, #00D4F
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TypeMania - Sign Up</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/signUp.css?v=<?php echo time(); ?>">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TypeMania - Sign Up</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/signUp.css?v=<?php echo time(); ?>">
 </head>
+
 <body style="<?php echo $bg_style; ?>">
 
   <main class="auth-wrapper">
@@ -26,7 +28,7 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #ff9142 35%, #00D4F
 
       <div class="auth-panel auth-panel-right">
         <h2 class="form-heading">SIGN UP</h2>
-        
+
         <form class="signup-form" action="../pages/homepageAfter.php" method="POST">
           <div class="input-field">
             <input type="email" name="email" placeholder="EMAIL" required>
@@ -56,4 +58,5 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #ff9142 35%, #00D4F
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
