@@ -1,4 +1,55 @@
 <?php
+require_once __DIR__ . '/../config/config.php';
+
+$errors = [];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = trim($_POST['username'] ?? '');
+    $password = $_POST['password'] ?? '';
+    $confirm  = $_POST['confirm_password'] ?? '';
+
+    // Validation
+    if (empty($username)) {
+        $errors[] = "Username is required";
+    }
+    if (strlen($password) < 6) {
+        $errors[] = "Password must be at least 6 characters";
+    }
+    if ($password !== $confirm) {
+        $errors[] = "Passwords do not match";
+    }
+
+    if (empty($errors)) {
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+        // Prepare insert into exact database columns
+        $stmt = $conn->prepare("INSERT INTO users (username, password_hash) VALUES (?, ?)");
+        
+        if ($stmt) {
+            $stmt->bind_param("ss", $username, $hashed_password);
+
+            if ($stmt->execute()) {
+                session_regenerate_id(true);
+                $_SESSION['user_id']  = $conn->insert_id;
+                $_SESSION['username'] = $username;
+                $_SESSION['last_activity'] = time();
+
+                header("Location: afterSignUp.php");
+                exit();
+            } else {
+                if ($conn->errno === 1062) {
+                    $errors[] = "Username is already taken.";
+                } else {
+                    $errors[] = "Registration failed: " . $stmt->error;
+                }
+            }
+            $stmt->close();
+        } else {
+            $errors[] = "Database query error: " . $conn->error;
+        }
+    }
+}
+
 $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #ff9142 35%, #00D4FF 60%, #19EC06 100%);";
 ?>
 <!DOCTYPE html>
@@ -29,9 +80,17 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #ff9142 35%, #00D4F
       <div class="auth-panel auth-panel-right">
         <h2 class="form-heading">SIGN UP</h2>
 
-        <form class="signup-form" action="../pages/homepageAfter.php" method="POST">
+        <?php if (!empty($errors)): ?>
+          <div class="alert alert-danger" style="background: rgba(255, 59, 48, 0.2); border: 1px solid #FF3B30; color: #fff; border-radius: 12px; margin-bottom: 20px;">
+            <?php foreach ($errors as $err): ?>
+              <p class="m-0">• <?php echo htmlspecialchars($err); ?></p>
+            <?php endforeach; ?>
+          </div>
+        <?php endif; ?>
+
+        <form class="signup-form" action="" method="POST">
           <div class="input-field">
-            <input type="email" name="email" placeholder="EMAIL" required>
+            <input type="text" name="username" placeholder="USERNAME" required value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>">
           </div>
 
           <div class="input-field">
@@ -42,12 +101,8 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #ff9142 35%, #00D4F
             <input type="password" name="confirm_password" placeholder="RE-ENTER PASSWORD" required>
           </div>
 
-          <div class="input-field">
-            <input type="password" name="admin_pin" placeholder="ADMIN PIN" required maxlength="6">
-          </div>
-
           <div class="form-actions">
-            <a href="../homepage.php" class="auth-btn btn-cancel text-center">CANCEL</a>
+            <a href="../pages/afterSignUp.php" class="auth-btn btn-cancel text-center">CANCEL</a>
             <button type="submit" class="auth-btn btn-signup">SIGN UP</button>
           </div>
         </form>

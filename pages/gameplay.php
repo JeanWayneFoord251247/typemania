@@ -99,12 +99,21 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
         let totalCharsTyped = 0;
         let prevInputLength = 0;
         let startTime = null;
-        let timeLeft = 60;
+        let timeLeft1 = 60;
         let currentLives = 5;
         const maxLives = 5;
         let chaserIndex = -6;
         let gameTimerInterval = null;
         let chaserInterval = null;
+        const difficultyMultipliers = {
+            'easy': 1.0,
+            'medium': 1.5,
+            'hard': 2.0
+        };
+        const baseMultiplier = difficultyMultipliers[GAME_DIFFICULTY] || 1.0;
+        let currentMultiplier = baseMultiplier;
+        let correctStreak = 0;
+        let totalScore = 0;
 
         const textDisplay = document.getElementById('text-display');
         const typeInput = document.getElementById('type-input');
@@ -115,6 +124,10 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
         const statAccuracy = document.getElementById('stat-accuracy');
         const statWpm = document.getElementById('stat-wpm');
         const statMultiplier = document.getElementById('stat-multiplier');
+
+        if (statMultiplier) {
+            statMultiplier.innerText = `${baseMultiplier.toFixed(1)}X`;
+        }
 
         function formatTime(seconds) {
             const mins = Math.floor(seconds / 60);
@@ -155,11 +168,11 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
 
         function startGame() {
             if (GAME_MODE !== 'chase') {
-                timerElement.innerText = formatTime(timeLeft);
+                timerElement.innerText = formatTime(timeLeft1);
                 gameTimerInterval = setInterval(() => {
-                    timeLeft--;
-                    timerElement.innerText = formatTime(timeLeft);
-                    if (timeLeft <= 0) {
+                    timeLeft1--;
+                    timerElement.innerText = formatTime(timeLeft1);
+                    if (timeLeft1 <= 0) {
                         clearInterval(gameTimerInterval);
                         typeInput.disabled = true;
                         showEndModal("TIME'S UP", "You ran out of time before completing the challenge.");
@@ -233,6 +246,11 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
                 const typedChar = userVal[lastTypedIndex];
 
                 if (typedChar !== targetChar) {
+                    correctStreak = 0;
+                    currentMultiplier = baseMultiplier;
+                    statMultiplier.innerText = `${currentMultiplier.toFixed(1)}X`;
+                    totalScore += Math.round(10 * currentMultiplier);
+
                     currentLives = Math.max(0, currentLives - 1);
                     livesIndicator.innerText = `${currentLives}/${maxLives}`;
                     livesIndicator.style.color = '#FF3B30';
@@ -247,8 +265,15 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
                         showEndModal("OUT OF LIVES", "You made too many mistakes.");
                         return;
                     }
+                } else {
+                    correctStreak++;
+                    if (correctStreak % 15 === 0) {
+                        currentMultiplier += 0.1;
+                        statMultiplier.innerText = `${currentMultiplier.toFixed(1)}X`;
+                    }
                 }
             }
+
             prevInputLength = userVal.length;
 
             if (userVal.length === spans.length && correctCount === spans.length) {
@@ -265,28 +290,30 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
             const totalWords = Math.round((totalCharsTyped + typeInput.value.length) / 5);
             const finalAccuracy = statAccuracy.innerText;
             const finalWpm = statWpm.innerText;
+            const finalScore = calculateFinalScore();
 
             if (GAME_MODE === 'rush') {
-                const peakMultiplier = statMultiplier ? statMultiplier.innerText : '1.0X';
                 statsContainer.innerHTML = `
-                    <div class="modal-stat-item"><span class="stat-big">${totalWords}</span><span class="stat-sub">WORDS CLEARED</span></div>
-                    <div class="modal-stat-item"><span class="stat-big">${finalAccuracy}</span><span class="stat-sub">ACCURACY</span></div>
-                    <div class="modal-stat-item"><span class="stat-big">${peakMultiplier}</span><span class="stat-sub">PEAK MULTIPLIER</span></div>
-                    <div class="modal-stat-item"><span class="stat-big">${finalWpm}</span><span class="stat-sub">WPM</span></div>
-                `;
+            <div class="modal-stat-item"><span class="stat-big">${finalScore}</span><span class="stat-sub">SCORE</span></div>
+            <div class="modal-stat-item"><span class="stat-big">${totalWords}</span><span class="stat-sub">WORDS</span></div>
+            <div class="modal-stat-item"><span class="stat-big">${finalAccuracy}</span><span class="stat-sub">ACCURACY</span></div>
+            <div class="modal-stat-item"><span class="stat-big">${finalWpm}</span><span class="stat-sub">WPM</span></div>
+        `;
             } else if (GAME_MODE === 'chase') {
                 statsContainer.innerHTML = `
-                    <div class="modal-stat-item"><span class="stat-big">${totalWords}</span><span class="stat-sub">WORDS TYPED</span></div>
-                    <div class="modal-stat-item"><span class="stat-big">${currentLives}/${maxLives}</span><span class="stat-sub">LIVES LEFT</span></div>
-                    <div class="modal-stat-item"><span class="stat-big">${finalWpm}</span><span class="stat-sub">PEAK WPM</span></div>
-                `;
+            <div class="modal-stat-item"><span class="stat-big">${finalScore}</span><span class="stat-sub">SCORE</span></div>
+            <div class="modal-stat-item"><span class="stat-big">${totalWords}</span><span class="stat-sub">WORDS</span></div>
+            <div class="modal-stat-item"><span class="stat-big">${currentLives}/${maxLives}</span><span class="stat-sub">LIVES</span></div>
+            <div class="modal-stat-item"><span class="stat-big">${finalWpm}</span><span class="stat-sub">PEAK WPM</span></div>
+        `;
             } else if (GAME_MODE === 'race') {
-                const timeSpent = Math.max(1, 60 - timeLeft);
+                const timeSpent = Math.max(1, 60 - timeLeft1);
                 statsContainer.innerHTML = `
-                    <div class="modal-stat-item"><span class="stat-big">${timeSpent}s</span><span class="stat-sub">TIME TAKEN</span></div>
-                    <div class="modal-stat-item"><span class="stat-big">${finalAccuracy}</span><span class="stat-sub">ACCURACY</span></div>
-                    <div class="modal-stat-item"><span class="stat-big">${finalWpm}</span><span class="stat-sub">RACE WPM</span></div>
-                `;
+            <div class="modal-stat-item"><span class="stat-big">${finalScore}</span><span class="stat-sub">SCORE</span></div>
+            <div class="modal-stat-item"><span class="stat-big">${timeSpent}s</span><span class="stat-sub">TIME</span></div>
+            <div class="modal-stat-item"><span class="stat-big">${finalAccuracy}</span><span class="stat-sub">ACCURACY</span></div>
+            <div class="modal-stat-item"><span class="stat-big">${finalWpm}</span><span class="stat-sub">WPM</span></div>
+        `;
             }
         }
 
@@ -303,6 +330,18 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
             populateModeStats(statsContainer);
 
             modal.style.setProperty('display', 'flex', 'important');
+        }
+
+        function calculateFinalScore() {
+            if (GAME_MODE === 'chase') {
+                return totalScore + (currentLives * 250);
+            }
+            if (GAME_MODE === 'race') {
+                const finalAccuracy = parseInt(statAccuracy.innerText) || 100;
+                const finalWpm = parseInt(statWpm.innerText) || 0;
+                return Math.round((finalWpm * 50) * (finalAccuracy / 100));
+            }
+            return totalScore;
         }
 
         document.getElementById('btn-restart').addEventListener('click', () => location.reload());
@@ -322,6 +361,52 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
         window.addEventListener('DOMContentLoaded', () => {
             startCountdown();
         });
+
+        let warnTimer;
+        let logoutTimer;
+        let countdownInterval;
+        let timeLeft = 10;
+
+        const modal = document.getElementById('idleModal');
+        const countdownEl = document.getElementById('idleCountdown');
+        const stayBtn = document.getElementById('stayLoggedInBtn');
+
+        function showWarning() {
+            modal.classList.remove('d-none');
+            timeLeft = 10;
+            countdownEl.textContent = timeLeft;
+
+            countdownInterval = setInterval(() => {
+                timeLeft--;
+                countdownEl.textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                }
+            }, 1000);
+
+            logoutTimer = setTimeout(() => {
+                window.location.href = '../pages/login.php?timeout=1';
+            }, 10000); 
+        }
+
+        function resetTimers() {
+            clearTimeout(warnTimer);
+            clearTimeout(logoutTimer);
+            clearInterval(countdownInterval);
+
+            if (modal) modal.classList.add('d-none');
+            warnTimer = setTimeout(showWarning, 20000);
+        }
+
+        ['mousemove', 'keydown', 'click', 'scroll'].forEach(evt => {
+            window.addEventListener(evt, resetTimers);
+        });
+
+        if (stayBtn) {
+            stayBtn.addEventListener('click', resetTimers);
+        }
+
+        resetTimers();
     </script>
 </body>
 

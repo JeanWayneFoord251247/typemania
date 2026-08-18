@@ -1,6 +1,47 @@
 <?php
+require_once __DIR__ . '/../config/config.php';
+
+if (isset($_SESSION['user_id'])) {
+  header("Location: afterSignUp.php");
+  exit();
+}
+
+$error = null;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $identifier = trim($_POST['username'] ?? '');
+  $password   = $_POST['password'] ?? '';
+
+  if (empty($identifier) || empty($password)) {
+    $error = "Please fill in all fields.";
+  } else {
+    $stmt = $conn->prepare("SELECT user_id, username, password_hash FROM users WHERE username = ?");
+    $stmt->bind_param("s", $identifier);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($user = $result->fetch_assoc()) {
+      if (password_verify($password, $user['password_hash'])) {
+        session_regenerate_id(true);
+        $_SESSION['user_id']       = $user['user_id'];
+        $_SESSION['username']      = $user['username'];
+        $_SESSION['last_activity'] = time();
+
+        header("Location: afterSignUp.php");
+        exit();
+      } else {
+        $error = "Invalid credentials.";
+      }
+    } else {
+      $error = "Invalid credentials.";
+    }
+    $stmt->close();
+  }
+}
+
 $bg_style = "background: linear-gradient(115deg, #19EC06 0%, #00D4FF 35%, #ff9142 60%, #FFF700 100%);";
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,9 +62,29 @@ $bg_style = "background: linear-gradient(115deg, #19EC06 0%, #00D4FF 35%, #ff914
       <div class="auth-panel auth-panel-left">
         <h2 class="form-heading">LOG IN</h2>
 
-        <form class="signup-form login-form" action="../pages/homepageAfter.php" method="POST">
+        <?php if (isset($_GET['timeout'])): ?>
+          <div class="alert alert-warning" style="background: rgba(255, 145, 66, 0.2); border: 1px solid #ff9142; color: #fff; border-radius: 12px; margin-bottom: 20px;">
+            Your session expired due to inactivity. Please log in again.
+          </div>
+        <?php endif; ?>
+
+        <?php if (isset($_SESSION['success'])): ?>
+          <div class="alert alert-success" style="background: rgba(25, 236, 6, 0.15); border: 1px solid #19EC06; color: #fff; border-radius: 12px; margin-bottom: 20px;">
+            <?php echo htmlspecialchars($_SESSION['success']);
+            unset($_SESSION['success']); ?>
+          </div>
+        <?php endif; ?>
+
+        <?php if ($error): ?>
+          <div class="alert alert-danger" style="background: rgba(255, 59, 48, 0.2); border: 1px solid #FF3B30; color: #fff; border-radius: 12px; margin-bottom: 20px;">
+            <?php echo htmlspecialchars($error); ?>
+          </div>
+        <?php endif; ?>
+
+        <form class="login-form" action="" method="POST">
+
           <div class="input-field">
-            <input type="email" name="email" placeholder="EMAIL" required>
+            <input type="text" name="username" placeholder="USERNAME" required value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>">
           </div>
 
           <div class="input-field">
@@ -31,7 +92,7 @@ $bg_style = "background: linear-gradient(115deg, #19EC06 0%, #00D4FF 35%, #ff914
           </div>
 
           <div class="input-field">
-            <input type="password" name="admin_pin" placeholder="ADMIN PIN" required maxlength="6">
+            <input type="password" name="admin_pin" placeholder="ADMIN PIN">
           </div>
 
           <div class="form-actions">
@@ -53,6 +114,7 @@ $bg_style = "background: linear-gradient(115deg, #19EC06 0%, #00D4FF 35%, #ff914
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
 </body>
 
 </html>

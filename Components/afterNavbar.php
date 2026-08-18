@@ -20,6 +20,7 @@ if (strlen($cleanNavName) >= 2) {
 ?>
 
 <link rel="stylesheet" href="../css/afterNavbar.css">
+<link rel="stylesheet" href="../css/idleModal.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <header class="navbar-wrapper">
@@ -57,6 +58,13 @@ if (strlen($cleanNavName) >= 2) {
         </div>
 
       </a>
+    </div>
+
+    <div id="idleModal" class="idle-modal d-none">
+      <div class="idle-modal-content text-center p-4">
+        <h4 class="mb-3">Are you still there?</h4>
+        <p>You have been inactive. You will be logged out in <span id="idleCountdown">10</span> seconds.</p>
+      </div>
     </div>
 
   </nav>

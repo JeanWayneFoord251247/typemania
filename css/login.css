@@ -118,7 +118,7 @@ body {
   text-transform: uppercase;
 }
 
-.signup-form {
+.login-form {
   width: 100%;
   max-width: 320px;
   display: flex;
