@@ -24,19 +24,8 @@ $quick_tips = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TypeMania</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/afterSignUp.css?v=<?php echo time(); ?>">
 
-    <style>
-        .quick-tips-text {
-            transition: opacity 0.5s ease-in-out;
-            opacity: 1;
-        }
-
-        .quick-tips-text.fade-out {
-            opacity: 0;
-        }
-    </style>
 </head>
 
 <body style="<?php echo $bg_style; ?>">
@@ -92,53 +81,6 @@ $quick_tips = [
             }, 500);
         }
         setInterval(cycleTip, 5000);
-
-        let warnTimer;
-        let logoutTimer;
-        let countdownInterval;
-        let timeLeft = 10;
-
-        const modal = document.getElementById('idleModal');
-        const countdownEl = document.getElementById('idleCountdown');
-        const stayBtn = document.getElementById('stayLoggedInBtn');
-
-        function showWarning() {
-            modal.classList.remove('d-none');
-            timeLeft = 10;
-            countdownEl.textContent = timeLeft;
-
-            countdownInterval = setInterval(() => {
-                timeLeft--;
-                countdownEl.textContent = timeLeft;
-                if (timeLeft <= 0) {
-                    clearInterval(countdownInterval);
-                }
-            }, 1000);
-
-            logoutTimer = setTimeout(() => {
-                window.location.href = '../pages/login.php?timeout=1';
-            }, 10000); 
-        }
-
-        function resetTimers() {
-            clearTimeout(warnTimer);
-            clearTimeout(logoutTimer);
-            clearInterval(countdownInterval);
-
-            if (modal) modal.classList.add('d-none');
-
-            warnTimer = setTimeout(showWarning, 20000);
-        }
-
-        ['mousemove', 'keydown', 'click', 'scroll'].forEach(evt => {
-            window.addEventListener(evt, resetTimers);
-        });
-
-        if (stayBtn) {
-            stayBtn.addEventListener('click', resetTimers);
-        }
-
-        resetTimers();
     </script>
 </body>
 

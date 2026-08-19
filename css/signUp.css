@@ -83,7 +83,7 @@ body {
 
 .welcome-heading {
   font-weight: 300;
-  font-family: 'RubikGlitch', cursive, sans-serif;
+  font-family: 'RubikGlitch', sans-serif;
   font-size: 48px;
   margin-bottom: 20px;
   letter-spacing: 1px;
@@ -109,7 +109,7 @@ body {
 }
 
 .form-heading {
-  font-family: 'RubikGlitch', cursive, sans-serif;
+  font-family: 'RubikGlitch', sans-serif;
   font-weight: 300;
   font-size: 48px;
   color: #ffffff;

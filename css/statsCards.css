@@ -116,7 +116,7 @@ body {
 }
 
 .stats-cards-container .mode-badge {
-  font-family: 'RubikGlitch', cursive, sans-serif;
+  font-family: 'RubikGlitch', sans-serif;
   font-weight: normal;
   background-color: #19ec06;
   color: #ffffff;
@@ -126,7 +126,7 @@ body {
 }
 
 .stats-cards-container .mode-badge .game {
-  font-family: 'FasterOne', cursive, sans-serif;
+  font-family: 'FasterOne', sans-serif;
   font-weight: normal;
   font-size: 14px;
   color: inherit;

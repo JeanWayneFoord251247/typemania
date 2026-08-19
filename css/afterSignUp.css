@@ -67,14 +67,14 @@ body {
 }
 
 .hero-title .type-part {
-  font-family: 'RubikGlitch', cursive, sans-serif;
+  font-family: 'RubikGlitch', sans-serif;
   color: #ffffff;
   letter-spacing: 4px;
   font-size: 96px;
 }
 
 .hero-title .mania-part {
-  font-family: 'RubikIso', cursive, sans-serif;
+  font-family: 'RubikIso', sans-serif;
   color: #ffffff;
   letter-spacing: 4px;
   font-size: 96px;
@@ -193,7 +193,7 @@ body {
 }
 
 .achievements-section .achievements-title {
-  font-family: 'RubikGlitch', cursive, sans-serif;
+  font-family: 'RubikGlitch', sans-serif;
   color: #ffffff;
   font-size: 72px;
   letter-spacing: 4px;
@@ -201,6 +201,15 @@ body {
   text-align: center;
   margin-top: 40px;
   margin-bottom: 30px;
+}
+
+.quick-tips-text {
+  transition: opacity 0.5s ease-in-out;
+  opacity: 1;
+}
+
+.quick-tips-text.fade-out {
+  opacity: 0;
 }
 
 @media (max-width: 768px) {

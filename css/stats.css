@@ -30,7 +30,7 @@ body {
 }
 
 .font-glitch {
-  font-family: 'RubikGlitch', cursive, sans-serif;
+  font-family: 'RubikGlitch', sans-serif;
 }
 
 .stats-wrapper {
@@ -78,7 +78,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'RubikGlitch', cursive, sans-serif;
+  font-family: 'RubikGlitch', sans-serif;
   font-size: 28px;
   transition:
     transform 0.2s ease,
@@ -119,7 +119,7 @@ body {
 }
 
 .player-name {
-  font-family: 'RubikGlitch', cursive, sans-serif;
+  font-family: 'RubikGlitch', sans-serif;
   font-size: 32px;
   margin: 0;
   letter-spacing: 1px;

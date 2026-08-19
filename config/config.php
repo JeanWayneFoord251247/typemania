@@ -14,7 +14,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$timeout_duration = 30;
+$timeout_duration = 3600; 
 
 if (isset($_SESSION['user_id'])) {
     if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $timeout_duration) {

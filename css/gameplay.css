@@ -139,7 +139,7 @@ body {
 }
 
 .subhead-title {
-  font-family: 'RubikGlitch', cursive, sans-serif;
+  font-family: 'RubikGlitch', sans-serif;
   font-size: 36px;
   color: #ffffff;
   letter-spacing: 2px;
@@ -154,24 +154,24 @@ body {
 }
 
 .typing-arena {
-  width: 100%;
-  max-width: 900px;
-  min-height: 160px;
-  margin-bottom: 30px;
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 120px;
+  overflow: hidden;
+  line-height: 38px;
+  scroll-behavior: smooth;
 }
 
 .text-display {
+  display: block;
   font-family: 'Inter', sans-serif;
-  font-size: 19px;
-  line-height: 32px;
+  font-size: 20px;
+  line-height: 38px;
   font-weight: 600;
-  text-align: center;
+  text-align: left;
   color: #6b7280;
   user-select: none;
+  word-break: break-word;
+  white-space: pre-wrap;
 }
 
 .char-current {

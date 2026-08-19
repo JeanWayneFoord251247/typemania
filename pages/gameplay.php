@@ -1,7 +1,5 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+require_once __DIR__ . '/../config/config.php';
 
 $mode = $_GET['mode'] ?? 'rush';
 $difficulty = $_GET['difficulty'] ?? 'easy';
@@ -90,30 +88,40 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
         const THEME_COLOR = "<?php echo $active_theme['color']; ?>";
 
         const passages = [
-            "To Truly Master The Mechanics Of Real-Time Typography, One Must Transcend Basic Muscle Memory And Embrace Absolute, Unyielding Accuracy.",
-            "A Single Momentary Lapse In Concentration, A Slip On A Semicolon, Or A Misjudged Dash Will Instantly Terminate Your Winning Streak!",
-            "Do Not Succumb To The Immense Pressure Of The Ticking Clock; Instead, Channel Your Inner Velocity And Strike Each Key With Precision."
+            "To truly master the mechanics of real-time typography, one must transcend basic muscle memory and embrace absolute, unyielding accuracy. A single momentary lapse in concentration, a slip on a semicolon, or a misjudged dash will instantly terminate your winning streak! Do not succumb to the immense pressure of the ticking clock; instead, channel your inner velocity and strike each key with unwavering precision as the chaser gains ground behind you."
         ];
 
-        let currentPassageIndex = 0;
-        let totalCharsTyped = 0;
-        let prevInputLength = 0;
-        let startTime = null;
-        let timeLeft1 = 60;
-        let currentLives = 5;
-        const maxLives = 5;
-        let chaserIndex = -6;
-        let gameTimerInterval = null;
-        let chaserInterval = null;
         const difficultyMultipliers = {
             'easy': 1.0,
             'medium': 1.5,
             'hard': 2.0
         };
         const baseMultiplier = difficultyMultipliers[GAME_DIFFICULTY] || 1.0;
-        let currentMultiplier = baseMultiplier;
+
+        const initialTimes = {
+            'easy': 90,
+            'medium': 75,
+            'hard': 60
+        };
+
+        let currentPassageIndex = 0;
+        let totalCharsTyped = 0;
+        let prevInputLength = 0;
+        let startTime = null;
+        let timeLeft = initialTimes[GAME_DIFFICULTY] || 60;
+        let currentLives = 5;
+        const maxLives = 5;
         let correctStreak = 0;
         let totalScore = 0;
+        let totalMistakes = 0;
+        let totalKeystrokes = 0;
+        let totalCorrectKeystrokes = 0;
+        let currentMultiplier = baseMultiplier;
+
+        let chaserIndex = -6;
+        let chaserSpeed = 300;
+        let chaserInterval = null;
+        let gameTimerInterval = null;
 
         const textDisplay = document.getElementById('text-display');
         const typeInput = document.getElementById('type-input');
@@ -129,10 +137,36 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
             statMultiplier.innerText = `${baseMultiplier.toFixed(1)}X`;
         }
 
+        if (timerElement && GAME_MODE !== 'chase') {
+            timerElement.innerText = formatTime(timeLeft);
+        }
+
         function formatTime(seconds) {
             const mins = Math.floor(seconds / 60);
             const secs = seconds % 60;
             return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        function calculateFinalScore() {
+            return totalScore;
+        }
+
+        function updateMetrics() {
+            const elapsedMinutes = (Date.now() - startTime) / 60000;
+            const wpm = elapsedMinutes > 0 ? Math.round((totalCorrectKeystrokes / 5) / elapsedMinutes) : 0;
+            const acc = totalKeystrokes > 0 ? Math.round((totalCorrectKeystrokes / totalKeystrokes) * 100) : 100;
+            statWpm.innerText = wpm;
+            statAccuracy.innerText = `${acc}%`;
+        }
+
+        function updateArenaScroll() {
+            const arena = document.querySelector('.typing-arena');
+            const currentSpan = textDisplay.querySelector('.char-current');
+            if (currentSpan && arena) {
+                const spanOffset = currentSpan.offsetTop;
+                const arenaCenter = arena.clientHeight / 2;
+                arena.scrollTop = spanOffset - arenaCenter;
+            }
         }
 
         function renderPassage(index) {
@@ -166,13 +200,32 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
             }, 1000);
         }
 
+        function startChaserLoop() {
+            if (chaserInterval) clearInterval(chaserInterval);
+
+            chaserInterval = setInterval(() => {
+                chaserIndex++;
+                const spans = textDisplay.querySelectorAll('span');
+
+                if (chaserIndex >= 0 && chaserIndex < spans.length) {
+                    spans[chaserIndex].classList.add('char-chased');
+                }
+
+                if (chaserIndex >= typeInput.value.length) {
+                    clearInterval(chaserInterval);
+                    typeInput.disabled = true;
+                    showEndModal("ELIMINATED", "The chaser caught up to you!");
+                }
+            }, chaserSpeed);
+        }
+
         function startGame() {
             if (GAME_MODE !== 'chase') {
-                timerElement.innerText = formatTime(timeLeft1);
+                timerElement.innerText = formatTime(timeLeft);
                 gameTimerInterval = setInterval(() => {
-                    timeLeft1--;
-                    timerElement.innerText = formatTime(timeLeft1);
-                    if (timeLeft1 <= 0) {
+                    timeLeft--;
+                    timerElement.innerText = formatTime(timeLeft);
+                    if (timeLeft <= 0) {
                         clearInterval(gameTimerInterval);
                         typeInput.disabled = true;
                         showEndModal("TIME'S UP", "You ran out of time before completing the challenge.");
@@ -186,29 +239,86 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
                     'medium': 250,
                     'hard': 150
                 };
-                const speed = chaserSpeeds[GAME_DIFFICULTY] || 300;
-
-                chaserInterval = setInterval(() => {
-                    chaserIndex++;
-                    const spans = textDisplay.querySelectorAll('span');
-
-                    if (chaserIndex >= 0 && chaserIndex < spans.length) {
-                        spans[chaserIndex].classList.add('char-chased');
-                    }
-
-                    if (chaserIndex >= typeInput.value.length) {
-                        clearInterval(chaserInterval);
-                        typeInput.disabled = true;
-                        showEndModal("ELIMINATED", "The chaser caught up to you!");
-                    }
-                }, speed);
+                chaserSpeed = chaserSpeeds[GAME_DIFFICULTY] || 300;
+                startChaserLoop();
             }
         }
 
-        function updateMetrics(typedLength) {
-            const elapsedMinutes = (Date.now() - startTime) / 60000;
-            const wpm = elapsedMinutes > 0 ? Math.round((typedLength / 5) / elapsedMinutes) : 0;
-            statWpm.innerText = wpm;
+        function populateModeStats(statsContainer) {
+            const totalWords = Math.round(totalCorrectKeystrokes / 5);
+            const finalAccuracy = totalKeystrokes > 0 ? `${Math.round((totalCorrectKeystrokes / totalKeystrokes) * 100)}%` : '100%';
+            const finalWpm = statWpm.innerText;
+            const finalScore = calculateFinalScore();
+
+            if (GAME_MODE === 'rush') {
+                statsContainer.innerHTML = `
+                <div class="modal-stat-item"><span class="stat-big">${finalScore}</span><span class="stat-sub">SCORE</span></div>
+                <div class="modal-stat-item"><span class="stat-big">${totalWords}</span><span class="stat-sub">WORDS</span></div>
+                <div class="modal-stat-item"><span class="stat-big">${finalAccuracy}</span><span class="stat-sub">ACCURACY</span></div>
+                <div class="modal-stat-item"><span class="stat-big">${finalWpm}</span><span class="stat-sub">WPM</span></div>
+            `;
+            } else if (GAME_MODE === 'chase') {
+                statsContainer.innerHTML = `
+                <div class="modal-stat-item"><span class="stat-big">${finalScore}</span><span class="stat-sub">SCORE</span></div>
+                <div class="modal-stat-item"><span class="stat-big">${totalWords}</span><span class="stat-sub">WORDS</span></div>
+                <div class="modal-stat-item"><span class="stat-big">${finalAccuracy}</span><span class="stat-sub">ACCURACY</span></div>
+                <div class="modal-stat-item"><span class="stat-big">${finalWpm}</span><span class="stat-sub">PEAK WPM</span></div>
+            `;
+            } else if (GAME_MODE === 'race') {
+                const initialTotal = initialTimes[GAME_DIFFICULTY] || 60;
+                const timeSpent = Math.max(1, initialTotal - timeLeft);
+                statsContainer.innerHTML = `
+                <div class="modal-stat-item"><span class="stat-big">${finalScore}</span><span class="stat-sub">SCORE</span></div>
+                <div class="modal-stat-item"><span class="stat-big">${timeSpent}s</span><span class="stat-sub">TIME</span></div>
+                <div class="modal-stat-item"><span class="stat-big">${finalAccuracy}</span><span class="stat-sub">ACCURACY</span></div>
+                <div class="modal-stat-item"><span class="stat-big">${finalWpm}</span><span class="stat-sub">WPM</span></div>
+            `;
+            }
+        }
+
+        function savePlayerScore() {
+            const finalScore = calculateFinalScore();
+            const finalWpm = parseInt(statWpm.innerText) || 0;
+            const finalAccuracy = totalKeystrokes > 0 ? Math.round((totalCorrectKeystrokes / totalKeystrokes) * 100) : 100;
+            const totalWords = Math.round(totalCorrectKeystrokes / 5);
+            const duration = startTime ? Math.round((Date.now() - startTime) / 1000) : 0;
+
+            fetch('../actions/saveScore.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        mode: GAME_MODE,
+                        difficulty: GAME_DIFFICULTY,
+                        points: finalScore,
+                        wpm: finalWpm,
+                        accuracy: finalAccuracy,
+                        words_typed: totalWords,
+                        duration_seconds: duration,
+                        mistakes: totalMistakes
+                    })
+                })
+                .then(res => res.json())
+                .then(data => console.log('Score saved:', data))
+                .catch(err => console.error('Save error:', err));
+        }
+
+        function showEndModal(title, description) {
+            if (gameTimerInterval) clearInterval(gameTimerInterval);
+            if (chaserInterval) clearInterval(chaserInterval);
+            typeInput.disabled = true;
+
+            savePlayerScore();
+
+            const modal = document.getElementById('game-modal');
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-desc').innerText = description;
+
+            const statsContainer = document.getElementById('modal-stats-container');
+            populateModeStats(statsContainer);
+
+            modal.style.setProperty('display', 'flex', 'important');
         }
 
         typeInput.addEventListener('input', () => {
@@ -234,39 +344,47 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
                 }
             });
 
-            const totalTypedNow = totalCharsTyped + userVal.length;
-            const totalCorrectNow = totalCharsTyped + correctCount;
-            const acc = totalTypedNow > 0 ? Math.round((totalCorrectNow / totalTypedNow) * 100) : 100;
-            statAccuracy.innerText = `${acc}%`;
-            updateMetrics(totalCorrectNow);
-
             const lastTypedIndex = userVal.length - 1;
             if (lastTypedIndex >= 0 && userVal.length > prevInputLength) {
+                totalKeystrokes++;
                 const targetChar = spans[lastTypedIndex].innerText;
                 const typedChar = userVal[lastTypedIndex];
 
                 if (typedChar !== targetChar) {
+                    totalMistakes++;
                     correctStreak = 0;
                     currentMultiplier = baseMultiplier;
                     statMultiplier.innerText = `${currentMultiplier.toFixed(1)}X`;
-                    totalScore += Math.round(10 * currentMultiplier);
 
-                    currentLives = Math.max(0, currentLives - 1);
-                    livesIndicator.innerText = `${currentLives}/${maxLives}`;
-                    livesIndicator.style.color = '#FF3B30';
-                    setTimeout(() => {
-                        livesIndicator.style.color = '#FFFFFF';
-                    }, 200);
+                    if (GAME_MODE === 'chase') {
+                        chaserSpeed = Math.max(60, chaserSpeed - 40);
+                        startChaserLoop();
+                    } else {
+                        currentLives = Math.max(0, currentLives - 1);
+                        livesIndicator.innerText = `${currentLives}/${maxLives}`;
+                        livesIndicator.style.color = '#FF3B30';
+                        setTimeout(() => {
+                            livesIndicator.style.color = '#FFFFFF';
+                        }, 200);
 
-                    if (currentLives <= 0) {
-                        if (gameTimerInterval) clearInterval(gameTimerInterval);
-                        if (chaserInterval) clearInterval(chaserInterval);
-                        typeInput.disabled = true;
-                        showEndModal("OUT OF LIVES", "You made too many mistakes.");
-                        return;
+                        if (currentLives <= 0) {
+                            if (gameTimerInterval) clearInterval(gameTimerInterval);
+                            if (chaserInterval) clearInterval(chaserInterval);
+                            typeInput.disabled = true;
+                            showEndModal("OUT OF LIVES", "You made too many mistakes.");
+                            return;
+                        }
                     }
                 } else {
+                    totalCorrectKeystrokes++;
                     correctStreak++;
+                    totalScore += Math.round(10 * currentMultiplier);
+
+                    if (GAME_MODE === 'rush' && (targetChar === ' ' || lastTypedIndex === spans.length - 1)) {
+                        timeLeft += 2;
+                        timerElement.innerText = formatTime(timeLeft);
+                    }
+
                     if (correctStreak % 15 === 0) {
                         currentMultiplier += 0.1;
                         statMultiplier.innerText = `${currentMultiplier.toFixed(1)}X`;
@@ -274,82 +392,25 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
                 }
             }
 
+            updateMetrics();
             prevInputLength = userVal.length;
 
             if (userVal.length === spans.length && correctCount === spans.length) {
                 totalCharsTyped += spans.length;
-                currentPassageIndex = (currentPassageIndex + 1) % passages.length;
+                currentPassageIndex++;
+
+                if (currentPassageIndex >= passages.length) {
+                    showEndModal("CHALLENGE COMPLETE", "You conquered all passages!");
+                    return;
+                }
+
                 typeInput.value = '';
                 prevInputLength = 0;
                 chaserIndex = -6;
                 renderPassage(currentPassageIndex);
             }
-        });
 
-        function populateModeStats(statsContainer) {
-            const totalWords = Math.round((totalCharsTyped + typeInput.value.length) / 5);
-            const finalAccuracy = statAccuracy.innerText;
-            const finalWpm = statWpm.innerText;
-            const finalScore = calculateFinalScore();
-
-            if (GAME_MODE === 'rush') {
-                statsContainer.innerHTML = `
-            <div class="modal-stat-item"><span class="stat-big">${finalScore}</span><span class="stat-sub">SCORE</span></div>
-            <div class="modal-stat-item"><span class="stat-big">${totalWords}</span><span class="stat-sub">WORDS</span></div>
-            <div class="modal-stat-item"><span class="stat-big">${finalAccuracy}</span><span class="stat-sub">ACCURACY</span></div>
-            <div class="modal-stat-item"><span class="stat-big">${finalWpm}</span><span class="stat-sub">WPM</span></div>
-        `;
-            } else if (GAME_MODE === 'chase') {
-                statsContainer.innerHTML = `
-            <div class="modal-stat-item"><span class="stat-big">${finalScore}</span><span class="stat-sub">SCORE</span></div>
-            <div class="modal-stat-item"><span class="stat-big">${totalWords}</span><span class="stat-sub">WORDS</span></div>
-            <div class="modal-stat-item"><span class="stat-big">${currentLives}/${maxLives}</span><span class="stat-sub">LIVES</span></div>
-            <div class="modal-stat-item"><span class="stat-big">${finalWpm}</span><span class="stat-sub">PEAK WPM</span></div>
-        `;
-            } else if (GAME_MODE === 'race') {
-                const timeSpent = Math.max(1, 60 - timeLeft1);
-                statsContainer.innerHTML = `
-            <div class="modal-stat-item"><span class="stat-big">${finalScore}</span><span class="stat-sub">SCORE</span></div>
-            <div class="modal-stat-item"><span class="stat-big">${timeSpent}s</span><span class="stat-sub">TIME</span></div>
-            <div class="modal-stat-item"><span class="stat-big">${finalAccuracy}</span><span class="stat-sub">ACCURACY</span></div>
-            <div class="modal-stat-item"><span class="stat-big">${finalWpm}</span><span class="stat-sub">WPM</span></div>
-        `;
-            }
-        }
-
-        function showEndModal(title, description) {
-            if (gameTimerInterval) clearInterval(gameTimerInterval);
-            if (chaserInterval) clearInterval(chaserInterval);
-            typeInput.disabled = true;
-
-            const modal = document.getElementById('game-modal');
-            document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-desc').innerText = description;
-
-            const statsContainer = document.getElementById('modal-stats-container');
-            populateModeStats(statsContainer);
-
-            modal.style.setProperty('display', 'flex', 'important');
-        }
-
-        function calculateFinalScore() {
-            if (GAME_MODE === 'chase') {
-                return totalScore + (currentLives * 250);
-            }
-            if (GAME_MODE === 'race') {
-                const finalAccuracy = parseInt(statAccuracy.innerText) || 100;
-                const finalWpm = parseInt(statWpm.innerText) || 0;
-                return Math.round((finalWpm * 50) * (finalAccuracy / 100));
-            }
-            return totalScore;
-        }
-
-        document.getElementById('btn-restart').addEventListener('click', () => location.reload());
-        const modalRetry = document.getElementById('modal-btn-retry');
-        if (modalRetry) modalRetry.addEventListener('click', () => location.reload());
-
-        document.querySelector('.typing-arena').addEventListener('click', () => {
-            if (!typeInput.disabled) typeInput.focus();
+            updateArenaScroll();
         });
 
         typeInput.addEventListener('keydown', (e) => {
@@ -358,55 +419,17 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
             }
         });
 
+        document.querySelector('.typing-arena').addEventListener('click', () => {
+            if (!typeInput.disabled) typeInput.focus();
+        });
+
+        document.getElementById('btn-restart').addEventListener('click', () => location.reload());
+        const modalRetry = document.getElementById('modal-btn-retry');
+        if (modalRetry) modalRetry.addEventListener('click', () => location.reload());
+
         window.addEventListener('DOMContentLoaded', () => {
             startCountdown();
         });
-
-        let warnTimer;
-        let logoutTimer;
-        let countdownInterval;
-        let timeLeft = 10;
-
-        const modal = document.getElementById('idleModal');
-        const countdownEl = document.getElementById('idleCountdown');
-        const stayBtn = document.getElementById('stayLoggedInBtn');
-
-        function showWarning() {
-            modal.classList.remove('d-none');
-            timeLeft = 10;
-            countdownEl.textContent = timeLeft;
-
-            countdownInterval = setInterval(() => {
-                timeLeft--;
-                countdownEl.textContent = timeLeft;
-                if (timeLeft <= 0) {
-                    clearInterval(countdownInterval);
-                }
-            }, 1000);
-
-            logoutTimer = setTimeout(() => {
-                window.location.href = '../pages/login.php?timeout=1';
-            }, 10000); 
-        }
-
-        function resetTimers() {
-            clearTimeout(warnTimer);
-            clearTimeout(logoutTimer);
-            clearInterval(countdownInterval);
-
-            if (modal) modal.classList.add('d-none');
-            warnTimer = setTimeout(showWarning, 20000);
-        }
-
-        ['mousemove', 'keydown', 'click', 'scroll'].forEach(evt => {
-            window.addEventListener(evt, resetTimers);
-        });
-
-        if (stayBtn) {
-            stayBtn.addEventListener('click', resetTimers);
-        }
-
-        resetTimers();
     </script>
 </body>
 
