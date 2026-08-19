@@ -22,11 +22,5 @@
       <a href="#">TWITTER(X)</a>
     </div>
 
-    <div class="footer-col link-col legal-col">
-      <a href="#">Privacy Policy</a>
-      <a href="#">Terms &amp; Conditions</a>
-      <a href="#">Contact Us</a>
-    </div>
-
   </div>
 </footer>

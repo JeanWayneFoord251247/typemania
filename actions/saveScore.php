@@ -25,7 +25,6 @@ $duration_seconds = (int)($data['duration_seconds'] ?? 0);
 $words_typed      = (int)($data['words_typed'] ?? 0);
 $mistakes         = (int)($data['mistakes'] ?? 0);
 
-// Map mode string to mode_id
 $mode_map = [
     'rush'  => 1,
     'chase' => 2,

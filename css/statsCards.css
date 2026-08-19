@@ -118,8 +118,6 @@ body {
 .stats-cards-container .mode-badge {
   font-family: 'RubikGlitch', sans-serif;
   font-weight: normal;
-  background-color: #19ec06;
-  color: #ffffff;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -132,24 +130,42 @@ body {
   color: inherit;
 }
 
-.stats-cards-container .multiplier-badge {
+.stats-cards-container .mode-badge.badge-green {
+  background-color: #19ec06;
+  color: #12131a;
+}
+
+.stats-cards-container .mode-badge.badge-yellow {
   background-color: #fff700;
   color: #12131a;
-  font-weight: 800;
 }
 
-.stats-cards-container .badge.badge-red {
-  background-color: #ff0000;
-  color: #ffffff;
-}
-
-.stats-cards-container .badge.badge-orange {
+.stats-cards-container .mode-badge.badge-orange {
   background-color: #ff9142;
-  color: #ffffff;
+  color: #12131a;
+}
+
+.stats-cards-container .multiplier-badge {
+  font-weight: 800;
 }
 
 .stats-cards-container .badge.badge-green {
   background-color: #19ec06;
+  color: #12131a;
+}
+
+.stats-cards-container .badge.badge-yellow {
+  background-color: #fff700;
+  color: #12131a;
+}
+
+.stats-cards-container .badge.badge-red {
+  background-color: #ff0000;
+  color: #12131a;
+}
+
+.stats-cards-container .badge.badge-orange {
+  background-color: #ff9142;
   color: #12131a;
 }
 
@@ -205,6 +221,9 @@ body {
   border-radius: 18px;
   padding: 8px 20px;
   cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
   transition:
     opacity 0.2s ease,
     transform 0.1s ease;
