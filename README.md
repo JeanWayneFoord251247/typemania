@@ -161,7 +161,7 @@ http://localhost/typemania/homepage.php
 
 ## Demo Video
 
-[![Watch the TypeMania Demo](https://drive.google.com/file/d/1HLcQEhy-4P8Ch3rRJwB5g9EBEy91M1_-/view?usp=sharing)
+* [Watch the TypeMania Demo](https://drive.google.com/file/d/1HLcQEhy-4P8Ch3rRJwB5g9EBEy91M1_-/view?usp=sharing)
 
 ---
 
