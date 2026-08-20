@@ -1,3 +1,6 @@
+//For demo video- go to line 75
+//go to line 136 
+
 document.addEventListener('DOMContentLoaded', () => {
   const configEl = document.getElementById('game-config');
   if (!configEl) return;
@@ -70,11 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
     return totalScore;
   }
 
-  function updateMetrics() {
-    const elapsedMinutes = (Date.now() - startTime) / 60000;
-    const wpm = elapsedMinutes > 0 ? Math.round(totalCorrectKeystrokes / 5 / elapsedMinutes) : 0;
+  function updateMetrics() { //-------here
+    const elapsedMinutes = (Date.now() - startTime) / 60000;//-------here
+    const wpm = elapsedMinutes > 0 ? Math.round(totalCorrectKeystrokes / 5 / elapsedMinutes) : 0;//-------here
     const acc =
-      totalKeystrokes > 0 ? Math.round((totalCorrectKeystrokes / totalKeystrokes) * 100) : 100;
+      totalKeystrokes > 0 ? Math.round((totalCorrectKeystrokes / totalKeystrokes) * 100) : 100;//-------here
     statWpm.innerText = wpm;
     statAccuracy.innerText = `${acc}%`;
   }
@@ -110,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderPassage(currentPassageIndex);
     let count = 3;
 
-    const interval = setInterval(() => {
+    const interval = setInterval(() => {//-------here
       count--;
       if (count > 0) {
         countdownNumber.innerText = count;
@@ -130,15 +133,15 @@ document.addEventListener('DOMContentLoaded', () => {
   function startChaserLoop() {
     if (chaserInterval) clearInterval(chaserInterval);
 
-    chaserInterval = setInterval(() => {
-      chaserIndex++;
+    chaserInterval = setInterval(() => {//-------here
+      chaserIndex++;//-------here
       const spans = textDisplay.querySelectorAll('span');
 
-      if (chaserIndex >= 0 && chaserIndex < spans.length) {
-        spans[chaserIndex].classList.add('char-chased');
+      if (chaserIndex >= 0 && chaserIndex < spans.length) {//-------here
+        spans[chaserIndex].classList.add('char-chased');//-------here
       }
 
-      if (chaserIndex >= typeInput.value.length) {
+      if (chaserIndex >= typeInput.value.length) {//-------here
         clearInterval(chaserInterval);
         typeInput.disabled = true;
         showEndModal('ELIMINATED', 'The chaser caught up to you!');
@@ -149,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function startGame() {
     if (GAME_MODE !== 'chase') {
       timerElement.innerText = formatTime(timeLeft);
-      gameTimerInterval = setInterval(() => {
+      gameTimerInterval = setInterval(() => {//-------here
         timeLeft--;
         timerElement.innerText = formatTime(timeLeft);
         if (timeLeft <= 0) {
@@ -166,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
         medium: 250,
         hard: 150,
       };
-      chaserSpeed = chaserSpeeds[GAME_DIFFICULTY] || 300;
+      chaserSpeed = chaserSpeeds[GAME_DIFFICULTY] || 300;//-------here
       startChaserLoop();
     }
   }
@@ -262,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const char = userVal[index];
       span.className = '';
 
-      if (GAME_MODE === 'chase' && index <= chaserIndex) {
+      if (GAME_MODE === 'chase' && index <= chaserIndex) {//-------here
         span.classList.add('char-chased');
       }
       if (char == null) {

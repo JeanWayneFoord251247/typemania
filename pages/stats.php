@@ -1,3 +1,5 @@
+//go to line 21
+
 <?php
 require_once __DIR__ . '/../config/config.php';
 
@@ -18,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { //here i check to see if the page r
     $new_letter   = (isset($_POST['letter_color']) && in_array($_POST['letter_color'], $valid_letter_colors)) ? $_POST['letter_color'] : null; //here we are just checking if the colours exist in our predefined array(line12-13) 
 
     if (!empty($new_username) || $new_circle || $new_letter) {
-        $update_stmt = $conn->prepare("UPDATE users SET username = COALESCE(NULLIF(?, ''), username), circle_color = COALESCE(?, circle_color), letter_color = COALESCE(?, letter_color) WHERE user_id = ?");
+        $update_stmt = $conn->prepare("UPDATE users SET username = COALESCE(NULLIF(?, ''), username), circle_color = COALESCE(?, circle_color), letter_color = COALESCE(?, letter_color) WHERE user_id = ?");//-----here
         $update_stmt->bind_param("sssi", $new_username, $new_circle, $new_letter, $user_id); //here we are binding php variables to the query placeholders s stands for string and i is integer so for example $new_username wil be binded to string aswell as new circle and new letter and user_id will be binded to an integer
         $update_stmt->execute();
         $update_stmt->close();

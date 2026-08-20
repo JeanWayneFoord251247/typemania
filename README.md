@@ -153,6 +153,18 @@ http://localhost/typemania/homepage.php
   <img src="./Assets/img/Gameplay.png" alt="TypeMania Gameplay" width="100%" />
 </p>
 
+---
+
+## Documentation
+
+* [Project Documentation](https://docs.google.com/document/d/1adPy6znT_iC09N8CflvW9SOTYKoqr0Ox_U5NWXOL284/edit?usp=sharing)
+
+## Demo Video
+
+[![Watch the TypeMania Demo](https://img.youtube.com/vi/YOUR_YOUTUBE_VIDEO_ID/maxresdefault.jpg)](https://www.youtube.com/watch?v=YOUR_YOUTUBE_VIDEO_ID)
+
+---
+
 ## Security Practices
 
 - **Prepared Statements:** Parameterized queries (`mysqli::prepare`) used across all authentication and leaderboard transactions to prevent SQL injection.
