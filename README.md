@@ -10,23 +10,23 @@
 
 ## Features
 
-* **Multiple Game Modes:**
-  * **TypeRush:** Race against a countdown timer where accurate sentences award bonus survival time.
-  * **TypeChase:** Stay ahead of a persistent color-tracking chaser with high WPM(Words per Minute) and precision.
-  * **TypeRace:** Complete passages within a strict time to beat performance benchmarks.
-* **Live Performance Metrics:** Real-time calculation of Words Per Minute (WPM), accuracy percentage, and dynamic streak multipliers.
-* **Auto-Scrolling Typing Arena:** Active text cursor centering dynamically adjusts the view as passages wrap.
-* **Global & Mode Leaderboards:** Track top scores, highest WPM, total words typed, and quickest run durations per mode with smooth scrolling views.
-* **Custom Player Profiles:** User authentication and personalized player avatar circles and color themes.
+- **Multiple Game Modes:**
+  - **TypeRush:** Race against a countdown timer where accurate sentences award bonus survival time.
+  - **TypeChase:** Stay ahead of a persistent color-tracking chaser with high WPM(Words per Minute) and precision.
+  - **TypeRace:** Complete passages within a strict time to beat performance benchmarks.
+- **Live Performance Metrics:** Real-time calculation of Words Per Minute (WPM), accuracy percentage, and dynamic streak multipliers.
+- **Auto-Scrolling Typing Arena:** Active text cursor centering dynamically adjusts the view as passages wrap.
+- **Global & Mode Leaderboards:** Track top scores, highest WPM, total words typed, and quickest run durations per mode with smooth scrolling views.
+- **Custom Player Profiles:** User authentication and personalized player avatar circles and color themes.
 
 ---
 
 ## Tech Stack
 
-* **Frontend:** HTML5, Vanilla CSS3, Vanilla JavaScript
-* **Backend:** PHP
-* **Database:** MySQL 
-* **Architecture:** Session-based authentication, modular PHP components, and RESTful JSON score-saving endpoints.
+- **Frontend:** HTML5, Vanilla CSS3, Vanilla JavaScript
+- **Backend:** PHP
+- **Database:** MySQL
+- **Architecture:** Session-based authentication, modular PHP components, and RESTful JSON score-saving endpoints.
 
 ---
 
@@ -52,10 +52,10 @@ homepage.php          # Landing page(before signup/login)
 
 Ensure you have the following installed locally:
 
-* **Web Server & Database:** [XAMPP](https://www.apachefriends.org/)
-* **PHP:** PHP 8.0 or higher
-* **Version Control:** [Git](https://git-scm.com/)
-* **Web Browser:** Modern browser (Chrome, Edge, Firefox, Brave)
+- **Web Server & Database:** [XAMPP](https://www.apachefriends.org/)
+- **PHP:** PHP 8.0 or higher
+- **Version Control:** [Git](https://git-scm.com/)
+- **Web Browser:** Modern browser (Chrome, Edge, Firefox, Brave)
 
 ---
 
@@ -117,7 +117,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$timeout_duration = 3600; 
+$timeout_duration = 3600;
 
 if (isset($_SESSION['user_id'])) {
     if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $timeout_duration) {
@@ -142,9 +142,27 @@ http://localhost/typemania/homepage.php
 
 ---
 
+## 6. Mockups
+
+<p align="center">
+  <img src="./Assets/img/Desktop.png" alt="TypeMania Desktop" width="100%" />
+</p>
+
+<p align="center">
+  <img src="./Assets/img/Tablet.png" alt="TypeMania Tablet" width="100%" />
+</p>
+
+<p align="center">
+  <img src="./Assets/img/Smartphone.png" alt="TypeMania Smartphone" width="100%" />
+</p>
+
+<p align="center">
+  <img src="./Assets/img/Gameplay.png" alt="TypeMania Gameplay" width="100%" />
+</p>
+
 ## Security Practices
 
-* **Prepared Statements:** Parameterized queries (`mysqli::prepare`) used across all authentication and leaderboard transactions to prevent SQL injection.
-* **Input Sanitization:** Inbound payloads stripped of tags using `strip_tags()` with bounded length assertions.
-* **Cryptographic Password Hashing:** Secure password verification and storage via `password_hash()` and `password_verify()` with `PASSWORD_DEFAULT`.
-* **Session Protection:** Session regeneration on login/signup (`session_regenerate_id(true)`) to mitigate session fixation attacks.
+- **Prepared Statements:** Parameterized queries (`mysqli::prepare`) used across all authentication and leaderboard transactions to prevent SQL injection.
+- **Input Sanitization:** Inbound payloads stripped of tags using `strip_tags()` with bounded length assertions.
+- **Cryptographic Password Hashing:** Secure password verification and storage via `password_hash()` and `password_verify()` with `PASSWORD_DEFAULT`.
+- **Session Protection:** Session regeneration on login/signup (`session_regenerate_id(true)`) to mitigate session fixation attacks.
