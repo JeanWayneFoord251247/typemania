@@ -291,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
         statMultiplier.innerText = `${currentMultiplier.toFixed(1)}X`;
 
         if (GAME_MODE === 'chase') {
-          chaserSpeed = Math.max(60, chaserSpeed - 40);
+          chaserSpeed = Math.max(60, chaserSpeed - 40);//----here
           startChaserLoop();
         } else {
           currentLives = Math.max(0, currentLives - 1);

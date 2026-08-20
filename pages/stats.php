@@ -1,4 +1,3 @@
-//go to line 21
 
 <?php
 require_once __DIR__ . '/../config/config.php';
