@@ -25,7 +25,6 @@ $quick_tips = [
     <title>TypeMania</title>
 
     <link rel="stylesheet" href="../css/afterSignUp.css?v=<?php echo time(); ?>">
-
 </head>
 
 <body style="<?php echo $bg_style; ?>">
@@ -50,7 +49,11 @@ $quick_tips = [
 
             <div class="quick-tips-card">
                 <h3 class="quick-tips-title">Quick Tip:</h3>
-                <p class="quick-tips-text" id="quick-tip-display">
+                <p 
+                    class="quick-tips-text" 
+                    id="quick-tip-display" 
+                    data-tips='<?php echo htmlspecialchars(json_encode($quick_tips), ENT_QUOTES, 'UTF-8'); ?>'
+                >
                     <?php echo htmlspecialchars($quick_tips[0]); ?>
                 </p>
             </div>
@@ -65,23 +68,7 @@ $quick_tips = [
 
     <?php include '../Components/footer.php'; ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        const tips = <?php echo json_encode($quick_tips); ?>;
-        let currentTipIndex = 0;
-        const tipElement = document.getElementById('quick-tip-display');
-
-        function cycleTip() {
-            tipElement.classList.add('fade-out');
-            setTimeout(() => {
-                currentTipIndex = (currentTipIndex + 1) % tips.length;
-                tipElement.textContent = tips[currentTipIndex];
-                tipElement.classList.remove('fade-out');
-            }, 500);
-        }
-        setInterval(cycleTip, 5000);
-    </script>
+    <script src="../js/afterSignUp.js?v=<?php echo time(); ?>" defer></script>
 </body>
 
 </html>

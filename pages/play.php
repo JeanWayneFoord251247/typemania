@@ -1,4 +1,8 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $bg_style = "background: linear-gradient(115deg, #00D4FF 0%, #19EC06 35%, #FFF700 60%, #ff9142 100%);";
 ?>
 <!DOCTYPE html>
@@ -8,8 +12,6 @@ $bg_style = "background: linear-gradient(115deg, #00D4FF 0%, #19EC06 35%, #FFF70
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TypeMania - Select Challenge</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/play.css?v=<?php echo time(); ?>">
 </head>
 
@@ -54,8 +56,6 @@ $bg_style = "background: linear-gradient(115deg, #00D4FF 0%, #19EC06 35%, #FFF70
     </main>
 
     <?php include '../Components/footer.php'; ?>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

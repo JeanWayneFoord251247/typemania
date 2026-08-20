@@ -36,7 +36,7 @@ $stmt = $conn->prepare("INSERT INTO game_scores (user_id, mode_id, difficulty, w
 
 if ($stmt) {
     $stmt->bind_param("iisidiiii", $user_id, $mode_id, $difficulty, $wpm, $accuracy, $points, $duration_seconds, $words_typed, $mistakes);
-    
+
     if ($stmt->execute()) {
         echo json_encode(['status' => 'success', 'score_id' => $conn->insert_id]);
     } else {

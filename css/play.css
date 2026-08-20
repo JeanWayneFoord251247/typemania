@@ -49,6 +49,7 @@ body {
   text-transform: uppercase;
   text-align: center;
   margin-bottom: 50px;
+  font-weight: 400;
 }
 
 .challenge-grid {
@@ -131,6 +132,7 @@ body {
   font-size: 38px;
   letter-spacing: 3px;
   margin-bottom: 24px;
+  font-weight: 400;
 }
 
 .highlight-rush {
@@ -138,6 +140,7 @@ body {
   color: #19ec06;
   font-size: 42px;
   letter-spacing: 3px;
+  font-weight: 400;
 }
 
 .highlight-chase {
@@ -145,6 +148,7 @@ body {
   color: #fff700;
   font-size: 42px;
   letter-spacing: 3px;
+  font-weight: 400;
 }
 
 .highlight-race {
@@ -152,6 +156,7 @@ body {
   color: #ff9142;
   font-size: 42px;
   letter-spacing: 3px;
+  font-weight: 400;
 }
 
 .card-description {

@@ -155,10 +155,18 @@ body {
 
 .typing-arena {
   position: relative;
+  width: 100%;
   height: 120px;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   line-height: 38px;
   scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.typing-arena::-webkit-scrollbar {
+  display: none;
 }
 
 .text-display {

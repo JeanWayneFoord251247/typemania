@@ -1,0 +1,162 @@
+/* Modal Backdrop Overlay */
+.modal {
+  display: none !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: rgba(18, 19, 26, 0.85) !important;
+  backdrop-filter: blur(8px) !important;
+  z-index: 99999 !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 20px !important;
+  box-sizing: border-box !important;
+}
+
+/* Modal Open State */
+.modal.show {
+  display: flex !important;
+}
+
+/* Modal Card Box */
+.custom-modal {
+  width: 100%;
+  max-width: 520px;
+  background-color: #12131a;
+  border: 2px solid #00d4ff;
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+  border-radius: 24px;
+  padding: 24px 30px;
+  color: #ffffff;
+  position: relative;
+  animation: modalPopIn 0.2s ease-out;
+}
+
+@keyframes modalPopIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 28px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modal-close-btn:hover {
+  color: #00d4ff;
+}
+
+.modal-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal-label {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #00d4ff;
+}
+
+.custom-input {
+  width: 100%;
+  background-color: #ffffff;
+  border: none;
+  outline: none;
+  padding: 12px 20px;
+  border-radius: 50px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: #12131a;
+}
+
+.custom-input:focus {
+  box-shadow: 0 0 12px #00d4ff;
+}
+
+.color-palette {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.color-swatch-label {
+  position: relative;
+  cursor: pointer;
+}
+
+.color-swatch-label input[type='radio'] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.color-swatch-label .color-swatch {
+  display: block;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.color-swatch-label:hover .color-swatch {
+  transform: scale(1.15);
+}
+
+.color-swatch-label input[type='radio']:checked + .color-swatch {
+  border-color: #ffffff;
+  box-shadow: 0 0 12px #ffffff;
+  transform: scale(1.1);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.btn-cancel-modal {
+  border: 1px solid #ffffff;
+  padding: 8px 22px;
+  font-size: 14px;
+}
+
+.btn-save-modal {
+  border: 2px solid #19ec06;
+  box-shadow: 0 0 10px #19ec06;
+  padding: 8px 22px;
+  font-size: 14px;
+}
+
+.btn-save-modal:hover {
+  background: #19ec06;
+  color: #12131a;
+}

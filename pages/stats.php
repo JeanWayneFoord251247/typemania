@@ -1,8 +1,8 @@
 <?php
 require_once __DIR__ . '/../config/config.php';
 
-if (!isset($_SESSION['user_id'])) { 
-    header("Location: login.php"); 
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
     exit; // here i check if the user is logged in if not then the user is redirected to the login page and the rest of the page does not load, so basically a prevention system for non authenticated users.
 }
 
@@ -10,7 +10,7 @@ $user_id = (int)$_SESSION['user_id']; // this just prevent any injections(no not
 $bg_style = "background: linear-gradient(115deg, #00D4FF 0%, #19EC06 35%, #FFF700 60%, #ff9142 100%);"; // this generates  a gradient background, just thought it could be cool in php.
 
 $valid_circle_colors = ['#00D4FF', '#19EC06', '#FFF700', '#ff9142', '#A855F7', '#EC4899', '#EF4444', '#3B82F6', '#FFFFFF'];
-$valid_letter_colors = ['#00D4FF', '#19EC06', '#FFF700', '#ff9142', '#A855F7', '#EC4899', '#EF4444', '#FFFFFF', '#12131A'];// both these inject colours into the website of which the user can each 1 colour from either option letter/circle for customization purposes
+$valid_letter_colors = ['#00D4FF', '#19EC06', '#FFF700', '#ff9142', '#A855F7', '#EC4899', '#EF4444', '#FFFFFF', '#12131A']; // both these inject colours into the website of which the user can each 1 colour from either option letter/circle for customization purposes
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') { //here i check to see if the page received a form submission via http post. In other words we are waiting for our takealot package.
     $new_username = isset($_POST['username']) ? substr(trim(strip_tags($_POST['username'])), 0, 16) : ''; //we are checking if our package actually arived with our exact order, then we strip any html and php tags to protect our code from injections and trim to remove any blank spaces and enforce a strict 16 character length
@@ -114,8 +114,8 @@ $mode_stats_stmt->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TypeMania - Player Stats</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/stats.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../css/customiseModal.css?v=<?php echo time(); ?>">
 </head>
 
 <body style="<?php echo $bg_style; ?>">
@@ -126,17 +126,16 @@ $mode_stats_stmt->close();
         <div class="stats-card">
 
             <div class="stats-header">
-                <div class="avatar-container" data-bs-toggle="modal" data-bs-target="#customizeProfileModal" title="Click to edit profile">
+                <div class="avatar-container" title="Click to edit profile">
                     <div class="avatar-box" style="border-color: <?php echo $circle_color; ?>; box-shadow: 0 0 18px <?php echo $circle_color; ?>;">
                         <span style="color: <?php echo $letter_color; ?>;"><?php echo $avatar_initials; ?></span>
                     </div>
-                    <div class="avatar-edit-badge">🖋️</div>
                 </div>
 
                 <div class="user-details">
                     <div class="name-edit-row">
                         <h1 class="player-name"><?php echo htmlspecialchars($username); ?></h1>
-                        <button type="button" class="btn-edit-profile" data-bs-toggle="modal" data-bs-target="#customizeProfileModal">EDIT PROFILE</button>
+                        <button type="button" class="btn-edit-profile">EDIT PROFILE</button>
                     </div>
                     <span class="player-rank-badge">RANK <?php echo $player_rank; ?></span>
                 </div>
@@ -200,99 +199,17 @@ $mode_stats_stmt->close();
             <div class="stats-actions">
                 <a href="play.php" class="stats-btn btn-play">PLAY AGAIN</a>
                 <a href="ranks.php" class="stats-btn btn-ranks">LEADERBOARDS</a>
+                <a href="../actions/logout.php" class="stats-btn btn-logout">LOGOUT</a>
             </div>
 
         </div>
     </main>
 
-    <div class="modal fade" id="customizeProfileModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content custom-modal">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title font-glitch" id="modalLabel">CUSTOMIZE PROFILE</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-                    <div class="modal-body">
-
-                        <div class="modal-preview-wrapper mb-4 text-center">
-                            <span class="modal-label d-block mb-2">LIVE PREVIEW</span>
-                            <div class="avatar-box mx-auto" id="previewCircle" style="border-color: <?php echo $circle_color; ?>; box-shadow: 0 0 18px <?php echo $circle_color; ?>;">
-                                <span id="previewText" style="color: <?php echo $letter_color; ?>;"><?php echo $avatar_initials; ?></span>
-                            </div>
-                        </div>
-
-                        <div class="modal-group">
-                            <label for="usernameInput" class="modal-label">USERNAME</label>
-                            <input type="text" id="usernameInput" name="username" class="custom-input" value="<?php echo htmlspecialchars($username); ?>" maxlength="16" required placeholder="ENTER USERNAME">
-                        </div>
-
-                        <div class="modal-group">
-                            <label class="modal-label">CIRCLE BORDER COLOR</label>
-                            <div class="color-palette">
-                                <?php foreach ($valid_circle_colors as $color): ?>
-                                    <label class="color-swatch-label">
-                                        <input type="radio" name="circle_color" value="<?php echo $color; ?>" <?php echo ($circle_color === $color) ? 'checked' : ''; ?>>
-                                        <span class="color-swatch" style="background-color: <?php echo $color; ?>;"></span>
-                                    </label>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
-
-                        <div class="modal-group">
-                            <label class="modal-label">LETTER COLOR</label>
-                            <div class="color-palette">
-                                <?php foreach ($valid_letter_colors as $color): ?>
-                                    <label class="color-swatch-label">
-                                        <input type="radio" name="letter_color" value="<?php echo $color; ?>" <?php echo ($letter_color === $color) ? 'checked' : ''; ?>>
-                                        <span class="color-swatch" style="background-color: <?php echo $color; ?>;"></span>
-                                    </label>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer border-0">
-                        <button type="button" class="stats-btn btn-cancel-modal" data-bs-dismiss="modal">CANCEL</button>
-                        <button type="submit" class="stats-btn btn-save-modal">SAVE CHANGES</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    <?php include '../Components/customiseModal.php'; ?>
 
     <?php include '../Components/footer.php'; ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const usernameInput = document.getElementById('usernameInput');
-            const previewCircle = document.getElementById('previewCircle');
-            const previewText = document.getElementById('previewText');
-
-            usernameInput?.addEventListener('input', (e) => {
-                const val = e.target.value.trim();
-                if (val.length >= 2) previewText.textContent = val.substring(0, 2).toUpperCase();
-                else if (val.length === 1) previewText.textContent = val.substring(0, 1).toUpperCase() + '_';
-                else previewText.textContent = 'TM';
-            });
-
-            document.querySelectorAll('input[name="circle_color"]').forEach(radio => {
-                radio.addEventListener('change', (e) => {
-                    previewCircle.style.borderColor = e.target.value;
-                    previewCircle.style.boxShadow = `0 0 18px ${e.target.value}`;
-                });
-            });
-
-            document.querySelectorAll('input[name="letter_color"]').forEach(radio => {
-                radio.addEventListener('change', (e) => {
-                    previewText.style.color = e.target.value;
-                });
-            });
-        });
-    </script>
+    <script src="../js/stats.js?v=<?php echo time(); ?>" defer></script>
 </body>
 
 </html>
