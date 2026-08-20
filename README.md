@@ -34,10 +34,10 @@
 
 ```text
 typemania/
-actions/              # PHP action scripts (saveScore, logout, auth handlers)
+actions/              # PHP action scripts (saveScore, logout)
 Assets/               # Custom fonts, icons, and images
 Components/           # Reusable UI partials (navbars, modals, stat cards)
-config/               # Database connection and environment config
+config/               # Database connection 
 css/                  # Custom modular stylesheets
 js/                   # Dedicated client-side scripts
 pages/                # Main application views (play, gameplay, ranks, stats)
@@ -86,13 +86,6 @@ cd typemania
 5. Click on the **Import** tab in the top navigation bar.
 6. Click **Choose File** and select your exported database file (e.g., `typemania_db.sql` or `database/schema.sql`).
 7. Scroll to the bottom and click **Import** (or **Go**).
-
-Alternatively, import via the command line:
-
-```bash
-# Windows / Mac / Linux MySQL CLI
-mysql -u root -p typemania_db < database/typemania_db.sql
-```
 
 ---
 
