@@ -1,4 +1,8 @@
-# ⌨️ TypeMania
+<p align="center">
+  <img src="/Assets/img/banner.png" alt="TypeMania Banner" width="100%" />
+</p>
+
+# TypeMania
 
 > Where chaotic speed meets surgical precision — a real-time web-based competitive typing speed test platform.
 
