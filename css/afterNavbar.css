@@ -60,25 +60,38 @@
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 55px;
+  gap: clamp(15px, 3vw, 45px);
 }
 
 .custom-navbar .nav-btn {
   font-family: 'Inter', sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   color: #ffffff;
   text-decoration: none;
-  padding: 8px 20px;
+  padding: 8px 18px;
   border-radius: 25px;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.custom-navbar .nav-btn:hover,
+.custom-navbar .nav-btn:hover {
+  background: rgba(255, 247, 0, 0.15);
+  color: #fff700;
+  transform: translateY(-2px);
+}
+
 .custom-navbar .nav-btn.active {
   background: #fff700;
   color: #12131a;
-  box-shadow: 0px 0px 10px #fff700;
+  box-shadow: 0px 0px 12px #fff700;
+  transform: scale(1.04);
+}
+
+.custom-navbar .nav-btn:active {
+  transform: scale(0.96);
 }
 
 .navbar-actions {
@@ -192,28 +205,49 @@
 
   .nav-links {
     position: absolute;
-    top: 85px;
-    left: 0px;
-    right: 0px;
+    top: 80px;
+    left: 10px;
+    right: 10px;
     background: #12131a;
-    border: 3px solid #fff700;
-    border-radius: 20px;
+    border: 2px solid #fff700;
+    border-radius: 24px;
     flex-direction: column;
-    align-items: center;
-    padding: 25px 0px;
-    gap: 20px;
+    align-items: stretch;
+    padding: 20px;
+    gap: 12px;
     box-shadow:
-      0px 10px 25px #12131a,
-      0px 0px 15px #fff700;
+      0px 12px 30px rgba(0, 0, 0, 0.8),
+      0px 0px 20px rgba(255, 247, 0, 0.4);
     display: none;
+    z-index: 1000;
+    animation: navSlideDown 0.25s ease-out forwards;
   }
 
-  .navbar-actions {
-    display: none;
+  .custom-navbar .nav-btn {
+    width: 100%;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 16px;
   }
 
   .nav-toggle:checked ~ .nav-links {
     display: flex;
+  }
+
+  .navbar-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .custom-navbar .signup-text {
+    font-size: 14px;
+  }
+
+  .custom-navbar .nav-avatar-mini {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
   }
 
   .nav-toggle:checked ~ .hamburger .bar:nth-child(1) {
@@ -272,5 +306,16 @@
 
   .quick-tips-text {
     font-size: 14px;
+  }
+}
+
+@keyframes navSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

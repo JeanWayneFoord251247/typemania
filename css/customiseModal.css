@@ -1,26 +1,23 @@
-/* Modal Backdrop Overlay */
 .modal {
-  display: none !important;
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  background-color: rgba(18, 19, 26, 0.85) !important;
-  backdrop-filter: blur(8px) !important;
-  z-index: 99999 !important;
-  justify-content: center !important;
-  align-items: center !important;
-  padding: 20px !important;
-  box-sizing: border-box !important;
+  display: none ;
+  position: fixed ;
+  top: 0 ;
+  left: 0 ;
+  width: 100vw ;
+  height: 100vh ;
+  background-color: rgba(18, 19, 26, 0.85) ;
+  backdrop-filter: blur(8px) ;
+  z-index: 99999 ;
+  justify-content: center ;
+  align-items: center ;
+  padding: 20px ;
+  box-sizing: border-box ;
 }
 
-/* Modal Open State */
 .modal.show {
-  display: flex !important;
+  display: flex ;
 }
 
-/* Modal Card Box */
 .custom-modal {
   width: 100%;
   max-width: 520px;
@@ -159,4 +156,13 @@
 .btn-save-modal:hover {
   background: #19ec06;
   color: #12131a;
+}
+
+.input-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #1a1b23 ;
+  color: #888888 ;
+  border: 1px solid rgba(255, 255, 255, 0.1) ;
+  box-shadow: none ;
 }

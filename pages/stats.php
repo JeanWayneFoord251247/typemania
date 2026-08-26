@@ -1,4 +1,3 @@
-
 <?php
 require_once __DIR__ . '/../config/config.php';
 
@@ -13,28 +12,43 @@ $bg_style = "background: linear-gradient(115deg, #00D4FF 0%, #19EC06 35%, #FFF70
 $valid_circle_colors = ['#00D4FF', '#19EC06', '#FFF700', '#ff9142', '#A855F7', '#EC4899', '#EF4444', '#3B82F6', '#FFFFFF'];
 $valid_letter_colors = ['#00D4FF', '#19EC06', '#FFF700', '#ff9142', '#A855F7', '#EC4899', '#EF4444', '#FFFFFF', '#12131A']; // both these inject colours into the website of which the user can each 1 colour from either option letter/circle for customization purposes
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') { //here i check to see if the page received a form submission via http post. In other words we are waiting for our takealot package.
-    $new_username = isset($_POST['username']) ? substr(trim(strip_tags($_POST['username'])), 0, 16) : ''; //we are checking if our package actually arived with our exact order, then we strip any html and php tags to protect our code from injections and trim to remove any blank spaces and enforce a strict 16 character length
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $new_username = isset($_POST['username']) ? substr(trim(strip_tags($_POST['username'])), 0, 16) : '';
     $new_circle   = (isset($_POST['circle_color']) && in_array($_POST['circle_color'], $valid_circle_colors)) ? $_POST['circle_color'] : null;
-    $new_letter   = (isset($_POST['letter_color']) && in_array($_POST['letter_color'], $valid_letter_colors)) ? $_POST['letter_color'] : null; //here we are just checking if the colours exist in our predefined array(line12-13) 
+    $new_letter   = (isset($_POST['letter_color']) && in_array($_POST['letter_color'], $valid_letter_colors)) ? $_POST['letter_color'] : null;
 
-    if (!empty($new_username) || $new_circle || $new_letter) {
-        $update_stmt = $conn->prepare("UPDATE users SET username = COALESCE(NULLIF(?, ''), username), circle_color = COALESCE(?, circle_color), letter_color = COALESCE(?, letter_color) WHERE user_id = ?");//-----here
-        $update_stmt->bind_param("sssi", $new_username, $new_circle, $new_letter, $user_id); //here we are binding php variables to the query placeholders s stands for string and i is integer so for example $new_username wil be binded to string aswell as new circle and new letter and user_id will be binded to an integer
-        $update_stmt->execute();
-        $update_stmt->close();
+    // Check if user already changed their username
+    $check_stmt = $conn->prepare("SELECT username_changed, username FROM users WHERE user_id = ?");
+    $check_stmt->bind_param("i", $user_id);
+    $check_stmt->execute();
+    $current_user_row = $check_stmt->get_result()->fetch_assoc();
+    $check_stmt->close();
 
-        if (!empty($new_username)) $_SESSION['username'] = $new_username;
-        if ($new_circle) $_SESSION['circle_color'] = $new_circle;
-        if ($new_letter) $_SESSION['letter_color'] = $new_letter;
-    }
+    $already_changed = (int)($current_user_row['username_changed'] ?? 0);
+    $current_db_username = $current_user_row['username'] ?? '';
+
+    // Allow username update only if not changed before and is different from current
+    $allow_user_change = (!$already_changed && !empty($new_username) && $new_username !== $current_db_username);
+    $final_username = $allow_user_change ? $new_username : $current_db_username;
+    $set_changed_flag = $allow_user_change ? 1 : $already_changed;
+
+    $update_stmt = $conn->prepare("UPDATE users SET username = ?, circle_color = COALESCE(?, circle_color), letter_color = COALESCE(?, letter_color), username_changed = ? WHERE user_id = ?");
+    $update_stmt->bind_param("sssii", $final_username, $new_circle, $new_letter, $set_changed_flag, $user_id);
+    $update_stmt->execute();
+    $update_stmt->close();
+
+    if ($allow_user_change) $_SESSION['username'] = $final_username;
+    if ($new_circle) $_SESSION['circle_color'] = $new_circle;
+    if ($new_letter) $_SESSION['letter_color'] = $new_letter;
 }
 
-$user_query = $conn->prepare("SELECT username, circle_color, letter_color FROM users WHERE user_id = ?");
-$user_query->bind_param("i", $user_id); // same as line 22
+$user_query = $conn->prepare("SELECT username, circle_color, letter_color, username_changed FROM users WHERE user_id = ?");
+$user_query->bind_param("i", $user_id);
 $user_query->execute();
 $user_data = $user_query->get_result()->fetch_assoc();
 $user_query->close();
+
+$username_changed = (bool)($user_data['username_changed'] ?? false);
 
 $username     = $user_data['username'] ?? $_SESSION['username'] ?? "TYPEMANIA";
 $circle_color = $user_data['circle_color'] ?? $_SESSION['circle_color'] ?? "#00D4FF";

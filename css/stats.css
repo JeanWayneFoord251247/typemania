@@ -105,6 +105,7 @@ body {
 .player-name {
   font-family: 'RubikGlitch', sans-serif;
   font-size: 32px;
+  font-weight: 200;
   margin: 0;
   letter-spacing: 1px;
 }
@@ -210,6 +211,7 @@ body {
 .section-title {
   font-family: 'RubikGlitch';
   font-size: 22px;
+  font-weight: 200;
   color: #ffffff;
   margin-bottom: 5px;
   letter-spacing: 1px;

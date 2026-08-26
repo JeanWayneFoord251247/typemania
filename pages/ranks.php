@@ -128,6 +128,10 @@ $dynamicTabsStyle = "style=\"border-color: {$currentConfig['border']}; box-shado
             </div>
         </div>
 
+        <div class="leaderboard-search-wrapper">
+            <input type="text" id="leaderboardSearch" class="leaderboard-search-input" placeholder="SEARCH PLAYER USERNAME..." autocomplete="off" style="border-color: <?php echo $currentConfig['border']; ?>; box-shadow: 0 0 14px <?php echo $currentConfig['glow']; ?>;">
+        </div>
+
         <div class="leaderboard-card" <?php echo $dynamicCardStyle; ?>>
 
             <div class="leaderboard-header">
@@ -136,23 +140,28 @@ $dynamicTabsStyle = "style=\"border-color: {$currentConfig['border']}; box-shado
                 <?php endforeach; ?>
             </div>
 
-            <div class="leaderboard-body">
+            <div class="leaderboard-body" id="leaderboardBody">
                 <?php if (!empty($all_leaderboard_rows)): ?>
                     <?php foreach ($all_leaderboard_rows as $row): ?>
                         <div class="leaderboard-row">
                             <div class="col-item"><?php echo htmlspecialchars($row[0]); ?></div>
-                            <div class="col-item"><?php echo htmlspecialchars($row[1]); ?></div>
+                            <div class="col-item username-col"><?php echo htmlspecialchars($row[1]); ?></div>
                             <div class="col-item"><?php echo htmlspecialchars($row[2]); ?></div>
                             <div class="col-item"><?php echo htmlspecialchars($row[3]); ?></div>
                             <div class="col-item"><?php echo htmlspecialchars($row[4]); ?></div>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <div class="leaderboard-row text-center">
+                    <div class="leaderboard-row text-center no-data-row">
                         <div class="col-item" style="grid-column: 1 / -1; width: 100%; opacity: 0.6;">No matches recorded for this mode yet.</div>
                     </div>
                 <?php endif; ?>
+
+                <div class="leaderboard-row text-center no-results-row" id="noSearchResults" style="display: none;">
+                    <div class="col-item" style="grid-column: 1 / -1; width: 100%; opacity: 0.6;">No players found matching your search.</div>
+                </div>
             </div>
+
         </div>
 
         <?php if ($user_rank_data): ?>
@@ -171,6 +180,7 @@ $dynamicTabsStyle = "style=\"border-color: {$currentConfig['border']}; box-shado
     </main>
 
     <?php include '../Components/footer.php'; ?>
+    <script src="../js/ranks.js?v=<?php echo time(); ?>" defer></script>
 
 </body>
 
