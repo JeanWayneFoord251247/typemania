@@ -12,35 +12,34 @@
   font-style: normal;
 }
 
-* {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-}
-
-body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background-color: #12131a;
-  color: #ffffff;
-  font-family: 'Inter';
-}
-
 html,
 body {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  min-height: 100vh;
   margin: 0px;
   padding: 0px;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: #12131a;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
 }
 
 *,
 *::before,
 *::after {
+  margin: 0px;
+  padding: 0px;
   box-sizing: border-box;
+}
+
+.main-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .hero-section {
@@ -51,9 +50,8 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 0px 20px 60px 20px;
+  padding: 100px 20px 60px 20px;
   box-sizing: border-box;
-  margin-bottom: 20px;
 }
 
 .hero-title {
@@ -69,14 +67,14 @@ body {
 }
 
 .hero-title .type-part {
-  font-family: 'RubikGlitch';
+  font-family: 'RubikGlitch', sans-serif;
   color: #ffffff;
   letter-spacing: 4px;
   font-size: 96px;
 }
 
 .hero-title .mania-part {
-  font-family: 'RubikIso';
+  font-family: 'RubikIso', sans-serif;
   color: #ffffff;
   letter-spacing: 4px;
   font-size: 96px;
@@ -84,7 +82,7 @@ body {
 
 .hero-tagline {
   color: #ffffff;
-  font-family: 'Inter';
+  font-family: 'Inter', sans-serif;
   font-size: 22px;
   font-weight: 500;
   max-width: 750px;
@@ -97,9 +95,10 @@ body {
   gap: 20px;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: 26px;
 }
 
-.hero-btn {
+.hero-buttons a.hero-btn {
   height: 70px;
   width: 280px;
   display: inline-flex;
@@ -108,7 +107,7 @@ body {
   text-align: center;
   line-height: 1;
   text-decoration: none;
-  font-family: 'Inter';
+  font-family: 'Inter', sans-serif;
   font-weight: 800;
   font-size: 16px;
   letter-spacing: 2px;
@@ -120,28 +119,97 @@ body {
   box-sizing: border-box;
 }
 
-.btn-primary-glow {
+.hero-buttons a.btn-primary-glow {
   border: 2px solid #ff9142;
   box-shadow: 0px 0px 15px #ff9142;
 }
 
-.btn-primary-glow:hover {
+.hero-buttons a.btn-primary-glow:hover {
   background: #ff9142;
   color: #12131a;
   box-shadow: 0px 0px 25px #ff9142;
   transform: translateY(-2px);
 }
 
-.btn-secondary-glow {
+.hero-buttons a.btn-secondary-glow {
   border: 2px solid #ff9142;
   box-shadow: 0px 0px 15px #ff9142;
 }
 
-.btn-secondary-glow:hover {
+.hero-buttons a.btn-secondary-glow:hover {
   background: #ff9142;
   color: #12131a;
   box-shadow: 0px 0px 25px #ff9142;
   transform: translateY(-2px);
+}
+
+.quick-tips-card {
+  max-width: 750px;
+  width: 90%;
+  margin: 40px auto 20px auto;
+  padding: 24px 35px;
+  background: #12131a;
+  border-radius: 50px;
+  border: 3px solid #fff700;
+  text-align: center;
+  box-shadow:
+    0px 0px 25px #fff700,
+    inset 0px 0px 15px #fff700;
+  backdrop-filter: blur(5px);
+}
+
+.quick-tips-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.quick-tips-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #ffffff;
+  margin: 0px;
+  line-height: 24px;
+  transition: opacity 0.5s ease-in-out;
+  opacity: 1;
+}
+
+.quick-tips-text.fade-out {
+  opacity: 0;
+}
+
+.achievements-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.achievements-section .achievements-title {
+  font-family: 'RubikGlitch', sans-serif;
+  color: #ffffff;
+  font-size: 72px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.quick-tips-text {
+  transition: opacity 0.5s ease-in-out;
+  opacity: 1;
+}
+
+.quick-tips-text.fade-out {
+  opacity: 0;
 }
 
 @media (max-width: 768px) {
@@ -150,9 +218,26 @@ body {
     font-size: 56px;
   }
 
+  .achievements-section .achievements-title {
+    font-size: 48px;
+  }
+
   .hero-tagline {
     font-size: 16px;
     line-height: 24px;
+  }
+
+  .quick-tips-card {
+    padding: 18px 20px;
+    border-radius: 30px;
+  }
+
+  .quick-tips-title {
+    font-size: 19px;
+  }
+
+  .quick-tips-text {
+    font-size: 14px;
   }
 }
 
@@ -163,7 +248,7 @@ body {
     max-width: 280px;
   }
 
-  .hero-btn {
+  .hero-buttons a.hero-btn {
     width: 100%;
   }
 

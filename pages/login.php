@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../config/config.php';
 
 if (isset($_SESSION['user_id'])) {
-  header("Location: afterSignUp.php");
+  header("Location: homepage.php");
   exit();
 }
 
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['username']      = $user['username'];
         $_SESSION['last_activity'] = time();
 
-        header("Location: afterSignUp.php");
+        header("Location: homepage.php");
         exit();
       } else {
         $error = "Invalid credentials.";

@@ -24,7 +24,7 @@ $quick_tips = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TypeMania</title>
 
-    <link rel="stylesheet" href="../css/afterSignUp.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../css/homepage.css?v=<?php echo time(); ?>">
 </head>
 
 <body style="<?php echo $bg_style; ?>">
@@ -68,7 +68,7 @@ $quick_tips = [
 
     <?php include '../Components/footer.php'; ?>
 
-    <script src="../js/afterSignUp.js?v=<?php echo time(); ?>" defer></script>
+    <script src="../js/homepage.js?v=<?php echo time(); ?>" defer></script>
 </body>
 
 </html>

@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../config/config.php';
 
 if (isset($_SESSION['user_id'])) {
-  header("Location: afterSignUp.php");
+  header("Location: homepage.php");
   exit();
 }
 
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['username']      = $username;
         $_SESSION['last_activity'] = time();
 
-        header("Location: afterSignUp.php");
+        header("Location: homepage.php");
         exit();
       } else {
         if ($conn->errno === 1062) {
@@ -104,7 +104,7 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #ff9142 35%, #00D4F
           </div>
 
           <div class="form-actions">
-            <a href="../pages/login.php" class="auth-btn btn-cancel">CANCEL</a>
+            <a href="../pages/index.php" class="auth-btn btn-cancel">CANCEL</a>
             <button type="submit" class="auth-btn btn-signup">SIGN UP</button>
           </div>
         </form>

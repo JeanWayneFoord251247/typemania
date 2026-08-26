@@ -38,7 +38,7 @@ if (strlen($cleanNavName) >= 2) {
     </label>
 
     <div class="nav-links">
-      <a href="../pages/afterSignUp.php" class="nav-btn <?php echo ($currentPage == 'afterSignUp.php') ? 'active' : ''; ?>">HOME</a>
+      <a href="../pages/homepage.php" class="nav-btn <?php echo ($currentPage == 'homepage.php') ? 'active' : ''; ?>">HOME</a>
       <a href="../pages/play.php" class="nav-btn <?php echo ($currentPage == 'play.php') ? 'active' : ''; ?>">PLAY</a>
       <a href="../pages/ranks.php" class="nav-btn <?php echo ($currentPage == 'ranks.php') ? 'active' : ''; ?>">RANKS</a>
       <a href="../pages/stats.php" class="nav-btn <?php echo ($currentPage == 'stats.php') ? 'active' : ''; ?>">STATS</a>
@@ -70,5 +70,5 @@ if (strlen($cleanNavName) >= 2) {
   </nav>
 
   <script src="../js/afterNavbar.js?v=<?php echo time(); ?>" defer></script>
-  
+
 </header>
