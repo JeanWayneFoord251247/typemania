@@ -94,7 +94,7 @@ $bg_style = "background: linear-gradient(115deg, #19EC06 0%, #00D4FF 35%, #ff914
           </div>
 
           <div class="form-actions">
-            <a href="../homepage.php" class="auth-btn btn-cancel">CANCEL</a>
+            <a href="../index.php" class="auth-btn btn-cancel">CANCEL</a>
             <button type="submit" class="auth-btn btn-signup">LOG IN</button>
           </div>
         </form>
