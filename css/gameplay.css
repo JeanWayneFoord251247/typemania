@@ -284,6 +284,41 @@ body {
   border-bottom: 2px solid #ff3b30;
 }
 
+.opponent-tracker-wrapper {
+  width: 100%;
+  max-width: 850px;
+  margin-bottom: 18px;
+  background: rgba(18, 19, 26, 0.6);
+  border: 1px solid rgba(255, 145, 66, 0.3);
+  border-radius: 20px;
+  padding: 12px 20px;
+  box-shadow: 0 0 15px rgba(255, 145, 66, 0.2);
+}
+
+.racer-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  color: #ff9142;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.progress-track {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: #ff9142;
+  box-shadow: 0 0 12px #ff9142;
+  transition: width 0.15s ease-out;
+}
+
 @media (max-width: 1024px) {
   .game-card {
     width: 85%;

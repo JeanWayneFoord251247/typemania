@@ -37,7 +37,7 @@ typemania/
 actions/              # PHP action scripts (saveScore, logout)
 Assets/               # Custom fonts, icons, and images
 Components/           # Reusable UI partials (navbars, modals, stat cards)
-config/               # Database connection 
+config/               # Database connection
 css/                  # Custom modular stylesheets
 js/                   # Dedicated client-side scripts
 pages/                # Main application views (play, gameplay, ranks, stats)
@@ -157,17 +157,17 @@ http://localhost/typemania/homepage.php
 
 ## Documentation
 
-* [Project Documentation](https://docs.google.com/document/d/1adPy6znT_iC09N8CflvW9SOTYKoqr0Ox_U5NWXOL284/edit?usp=sharing)
+- [Project Documentation](https://docs.google.com/document/d/1adPy6znT_iC09N8CflvW9SOTYKoqr0Ox_U5NWXOL284/edit?usp=sharing)
 
 ## Demo Video
 
-* [Watch the TypeMania Demo](https://drive.google.com/file/d/1HLcQEhy-4P8Ch3rRJwB5g9EBEy91M1_-/view?usp=sharing)
+- [Watch the TypeMania Demo](https://drive.google.com/file/d/1rTaktM0tkgs7y3Z-Cj5HQxZD11YRRlMx/view?usp=sharing)
 
 ---
 
 ## Security Practices
 
 - **Prepared Statements:** Parameterized queries (`mysqli::prepare`) used across all authentication and leaderboard transactions to prevent SQL injection.
-- **Input Sanitization:** Inbound payloads stripped of tags using `strip_tags()` with bounded length assertions.
+- **Input Sanitization:** Inbound payloads stripped of tags using `strip_tags()` with restricted lenghts.
 - **Cryptographic Password Hashing:** Secure password verification and storage via `password_hash()` and `password_verify()` with `PASSWORD_DEFAULT`.
-- **Session Protection:** Session regeneration on login/signup (`session_regenerate_id(true)`) to mitigate session fixation attacks.
+- **Session Protection:** Session regeneration on login/signup (`session_regenerate_id(true)`) to stop session fixation attacks.

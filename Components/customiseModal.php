@@ -16,8 +16,19 @@
                 </div>
 
                 <div class="modal-group">
-                    <label for="usernameInput" class="modal-label">USERNAME</label>
-                    <input type="text" id="usernameInput" name="username" class="custom-input" value="<?php echo htmlspecialchars($username); ?>" maxlength="16" required placeholder="ENTER USERNAME">
+                    <label for="usernameInput" class="modal-label">
+                        USERNAME <?php if ($username_changed): ?><span style="color: #ef4444; font-size: 11px;">(LOCKED - ALREADY CHANGED)</span><?php endif; ?>
+                    </label>
+                    <input
+                        type="text"
+                        id="usernameInput"
+                        name="username"
+                        class="custom-input <?php echo $username_changed ? 'input-disabled' : ''; ?>"
+                        value="<?php echo htmlspecialchars($username); ?>"
+                        maxlength="16"
+                        required
+                        placeholder="ENTER USERNAME"
+                        <?php echo $username_changed ? 'readonly' : ''; ?>>
                 </div>
 
                 <div class="modal-group">

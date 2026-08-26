@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 20, 2026 at 01:43 PM
+-- Generation Time: Aug 26, 2026 at 11:34 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -154,7 +154,13 @@ INSERT INTO `game_scores` (`score_id`, `user_id`, `mode_id`, `opponent_user_id`,
 (82, 10, 1, NULL, 'easy', 32, 94.00, 810, 29.00, 15, 5, NULL, NULL, NULL, '2026-08-20 11:18:29'),
 (83, 10, 2, NULL, 'easy', 35, 91.00, 1276, 40.00, 23, 12, NULL, NULL, NULL, '2026-08-20 11:19:27'),
 (84, 11, 1, NULL, 'easy', 33, 89.00, 459, 16.00, 8, 5, NULL, NULL, NULL, '2026-08-20 11:32:15'),
-(85, 11, 2, NULL, 'easy', 29, 81.00, 308, 14.00, 6, 7, NULL, NULL, NULL, '2026-08-20 11:32:51');
+(85, 11, 2, NULL, 'easy', 29, 81.00, 308, 14.00, 6, 7, NULL, NULL, NULL, '2026-08-20 11:32:51'),
+(86, 11, 3, NULL, 'medium', 38, 89.00, 651, 15.00, 8, 5, NULL, NULL, NULL, '2026-08-26 08:16:47'),
+(87, 11, 3, NULL, 'hard', 40, 90.00, 875, 14.00, 9, 5, NULL, NULL, NULL, '2026-08-26 08:19:22'),
+(88, 13, 1, NULL, 'easy', 12, 17.00, 10, 1.00, 0, 5, NULL, NULL, NULL, '2026-08-26 09:08:48'),
+(89, 13, 1, NULL, 'easy', 9, 77.00, 171, 24.00, 3, 5, NULL, NULL, NULL, '2026-08-26 09:09:18'),
+(90, 13, 2, NULL, 'easy', 35, 81.00, 676, 22.00, 13, 15, NULL, NULL, NULL, '2026-08-26 09:10:01'),
+(91, 13, 3, NULL, 'easy', 24, 90.00, 521, 24.00, 9, 5, NULL, NULL, NULL, '2026-08-26 09:10:49');
 
 -- --------------------------------------------------------
 
@@ -168,6 +174,7 @@ CREATE TABLE `users` (
   `password_hash` varchar(255) NOT NULL,
   `circle_color` varchar(7) DEFAULT '#00D4FF',
   `letter_color` varchar(7) DEFAULT '#00D4FF',
+  `username_changed` tinyint(1) DEFAULT 0,
   `role` enum('user','admin') NOT NULL DEFAULT 'user',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -177,18 +184,20 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `password_hash`, `circle_color`, `letter_color`, `role`, `created_at`, `updated_at`) VALUES
-(1, 'Jaco', '$2y$10$fVf73Bpypp3Jn5boUlkymuYKFIiHX2C0JxgwYCrRVLqSqLEhaVdLO', '#00D4FF', '#00D4FF', 'user', '2026-08-18 15:22:27', '2026-08-18 15:22:27'),
-(2, 'Peanut', '$2y$10$MlguiAABvrcDLMXAQLNENOB8XXlbTO6PNKG7iCbo0wTc2XZMZTbbG', '#00D4FF', '#00D4FF', 'user', '2026-08-19 08:40:03', '2026-08-19 08:40:03'),
-(3, 'Jean-Wayne', '$2y$10$cRRDtlmTevWU15p9.f53muUKjBECMtkdcTyFAvE6brjM0dmCR/VGS', '#00D4FF', '#00D4FF', 'user', '2026-08-19 11:11:52', '2026-08-19 11:11:52'),
-(4, 'Alijandro', '$2y$10$RVYoRFf3Gon1H9FAwQKtM.Z5ZoDaJpOGk3QviFwuBts.WsYAqWxs.', '#A855F7', '#FFFFFF', 'user', '2026-08-19 13:08:25', '2026-08-19 13:09:08'),
-(5, 'Caden', '$2y$10$YL5JeSQn93VXzGPVKDAHP.EkTevcWnXo5JAa1Eff0.hRsMUMxrL/.', '#00D4FF', '#00D4FF', 'user', '2026-08-20 08:16:15', '2026-08-20 08:16:15'),
-(6, 'Delmarie', '$2y$10$ipegssKMI1LeHXBAFVsEkuZyuj5rtbrtLR8RziAVf.9kZ3KnxC3E6', '#00D4FF', '#00D4FF', 'user', '2026-08-20 08:26:21', '2026-08-20 08:26:21'),
-(7, 'Wayne', '$2y$10$STTf0.YbJzLcw37.x3UiCeIwLVewy4rF8.cjw8qqpWm3tfyZ.kl.m', '#FFF700', '#FFFFFF', 'user', '2026-08-20 09:01:06', '2026-08-20 09:23:37'),
-(8, 'Bruce', '$2y$10$HwOo4Aj76pSEoTfOYFMMMOdGJ/mKK13uk859LX0AGkN1VAAIMmYKG', '#A855F7', '#FFFFFF', 'user', '2026-08-20 11:03:00', '2026-08-20 11:06:32'),
-(9, 'Uncle', '$2y$10$zwq7DTGCnGLI/4408fIu5uHkjONSv6AkdNXh2R8EgF.dUxEpcJ19.', '#A855F7', '#FFFFFF', 'user', '2026-08-20 11:11:58', '2026-08-20 11:12:44'),
-(10, 'Granny', '$2y$10$Uf6BDQVUNjW0ilkRCMTJouRPrK..ZrgEGjPwf98vcEnGt0uvbVG82', '#A855F7', '#FFFFFF', 'user', '2026-08-20 11:16:54', '2026-08-20 11:17:32'),
-(11, 'Mom', '$2y$10$RrauzjOKwMqMdWAb79vjrex5DSZCO6enC6t5bho39X3SN3RoATfRK', '#00D4FF', '#00D4FF', 'user', '2026-08-20 11:30:43', '2026-08-20 11:30:43');
+INSERT INTO `users` (`user_id`, `username`, `password_hash`, `circle_color`, `letter_color`, `username_changed`, `role`, `created_at`, `updated_at`) VALUES
+(1, 'Jaco', '$2y$10$fVf73Bpypp3Jn5boUlkymuYKFIiHX2C0JxgwYCrRVLqSqLEhaVdLO', '#00D4FF', '#00D4FF', 0, 'user', '2026-08-18 15:22:27', '2026-08-18 15:22:27'),
+(2, 'Peanut', '$2y$10$MlguiAABvrcDLMXAQLNENOB8XXlbTO6PNKG7iCbo0wTc2XZMZTbbG', '#00D4FF', '#00D4FF', 0, 'user', '2026-08-19 08:40:03', '2026-08-19 08:40:03'),
+(3, 'Jean-Wayne', '$2y$10$cRRDtlmTevWU15p9.f53muUKjBECMtkdcTyFAvE6brjM0dmCR/VGS', '#00D4FF', '#00D4FF', 0, 'user', '2026-08-19 11:11:52', '2026-08-19 11:11:52'),
+(4, 'Alijandro', '$2y$10$RVYoRFf3Gon1H9FAwQKtM.Z5ZoDaJpOGk3QviFwuBts.WsYAqWxs.', '#A855F7', '#FFFFFF', 0, 'user', '2026-08-19 13:08:25', '2026-08-19 13:09:08'),
+(5, 'Caden', '$2y$10$YL5JeSQn93VXzGPVKDAHP.EkTevcWnXo5JAa1Eff0.hRsMUMxrL/.', '#00D4FF', '#00D4FF', 0, 'user', '2026-08-20 08:16:15', '2026-08-20 08:16:15'),
+(6, 'Delmarie', '$2y$10$ipegssKMI1LeHXBAFVsEkuZyuj5rtbrtLR8RziAVf.9kZ3KnxC3E6', '#00D4FF', '#00D4FF', 0, 'user', '2026-08-20 08:26:21', '2026-08-20 08:26:21'),
+(7, 'Wayne', '$2y$10$STTf0.YbJzLcw37.x3UiCeIwLVewy4rF8.cjw8qqpWm3tfyZ.kl.m', '#FFF700', '#FFFFFF', 0, 'user', '2026-08-20 09:01:06', '2026-08-20 09:23:37'),
+(8, 'Bruce', '$2y$10$HwOo4Aj76pSEoTfOYFMMMOdGJ/mKK13uk859LX0AGkN1VAAIMmYKG', '#A855F7', '#FFFFFF', 0, 'user', '2026-08-20 11:03:00', '2026-08-20 11:06:32'),
+(9, 'Uncle', '$2y$10$zwq7DTGCnGLI/4408fIu5uHkjONSv6AkdNXh2R8EgF.dUxEpcJ19.', '#A855F7', '#FFFFFF', 0, 'user', '2026-08-20 11:11:58', '2026-08-20 11:12:44'),
+(10, 'Granny', '$2y$10$Uf6BDQVUNjW0ilkRCMTJouRPrK..ZrgEGjPwf98vcEnGt0uvbVG82', '#A855F7', '#FFFFFF', 0, 'user', '2026-08-20 11:16:54', '2026-08-20 11:17:32'),
+(11, 'Dad', '$2y$10$RrauzjOKwMqMdWAb79vjrex5DSZCO6enC6t5bho39X3SN3RoATfRK', '#00D4FF', '#00D4FF', 1, 'user', '2026-08-20 11:30:43', '2026-08-26 08:00:06'),
+(12, 'Jeff', '$2y$10$dmEDfcT8fEN5vnavKfm0XOxZAYn9mMUxmqO70XJSMDOMVht6eHelK', '#A855F7', '#FFFFFF', 1, 'user', '2026-08-26 09:03:42', '2026-08-26 09:04:47'),
+(13, 'Kyle', '$2y$10$wKmpbbbhgOmrKZq4wLnZR.avquqmDjCvxsHQ9YQfoyk/agZeqldQG', '#A855F7', '#FFFFFF', 1, 'user', '2026-08-26 09:07:04', '2026-08-26 09:08:17');
 
 --
 -- Indexes for dumped tables
@@ -231,13 +240,13 @@ ALTER TABLE `game_modes`
 -- AUTO_INCREMENT for table `game_scores`
 --
 ALTER TABLE `game_scores`
-  MODIFY `score_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `score_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables

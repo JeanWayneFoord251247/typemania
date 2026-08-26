@@ -58,6 +58,17 @@ $bg_style = "background: linear-gradient(115deg, #FFF700 0%, #19EC06 35%,  #00D4
                 <span id="passage-progress" class="subhead-counter">5/5</span>
             </div>
 
+            <?php if ($mode === 'race'): ?>
+                <div class="opponent-tracker-wrapper" id="opponent-tracker">
+                    <div class="racer-tag">
+                        <span id="opponent-name">GHOST RACER (BOT)</span>: <span id="opponent-wpm">0</span> WPM
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-bar-fill" id="opponent-progress-bar" style="width: 0%;"></div>
+                    </div>
+                </div>
+            <?php endif; ?>
+
             <div class="typing-arena">
                 <p id="text-display" class="text-display"></p>
                 <input type="text" id="type-input" class="hidden-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" disabled>

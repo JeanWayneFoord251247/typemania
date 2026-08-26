@@ -1,5 +1,5 @@
 //For demo video- go to line 75
-//go to line 136 
+//go to line 136
 
 document.addEventListener('DOMContentLoaded', () => {
   const configEl = document.getElementById('game-config');
@@ -25,6 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
     medium: 75,
     hard: 60,
   };
+
+  let botCharsTyped = 0;
+  let botInterval = null;
+  let botTargetWpm = 45;
+  let botNames = ['CyberRacer', 'ByteRunner', 'NeonPhantom', 'VelocityX', 'ApexTyper'];
 
   let currentPassageIndex = 0;
   let totalCharsTyped = 0;
@@ -73,11 +78,12 @@ document.addEventListener('DOMContentLoaded', () => {
     return totalScore;
   }
 
-  function updateMetrics() { //-------here
-    const elapsedMinutes = (Date.now() - startTime) / 60000;//-------here
-    const wpm = elapsedMinutes > 0 ? Math.round(totalCorrectKeystrokes / 5 / elapsedMinutes) : 0;//-------here
+  function updateMetrics() {
+    //-------here
+    const elapsedMinutes = (Date.now() - startTime) / 60000; //-------here
+    const wpm = elapsedMinutes > 0 ? Math.round(totalCorrectKeystrokes / 5 / elapsedMinutes) : 0; //-------here
     const acc =
-      totalKeystrokes > 0 ? Math.round((totalCorrectKeystrokes / totalKeystrokes) * 100) : 100;//-------here
+      totalKeystrokes > 0 ? Math.round((totalCorrectKeystrokes / totalKeystrokes) * 100) : 100; //-------here
     statWpm.innerText = wpm;
     statAccuracy.innerText = `${acc}%`;
   }
@@ -113,7 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
     renderPassage(currentPassageIndex);
     let count = 3;
 
-    const interval = setInterval(() => {//-------here
+    const interval = setInterval(() => {
+      //-------here
       count--;
       if (count > 0) {
         countdownNumber.innerText = count;
@@ -133,15 +140,18 @@ document.addEventListener('DOMContentLoaded', () => {
   function startChaserLoop() {
     if (chaserInterval) clearInterval(chaserInterval);
 
-    chaserInterval = setInterval(() => {//-------here
-      chaserIndex++;//-------here
+    chaserInterval = setInterval(() => {
+      //-------here
+      chaserIndex++; //-------here
       const spans = textDisplay.querySelectorAll('span');
 
-      if (chaserIndex >= 0 && chaserIndex < spans.length) {//-------here
-        spans[chaserIndex].classList.add('char-chased');//-------here
+      if (chaserIndex >= 0 && chaserIndex < spans.length) {
+        //-------here
+        spans[chaserIndex].classList.add('char-chased'); //-------here
       }
 
-      if (chaserIndex >= typeInput.value.length) {//-------here
+      if (chaserIndex >= typeInput.value.length) {
+        //-------here
         clearInterval(chaserInterval);
         typeInput.disabled = true;
         showEndModal('ELIMINATED', 'The chaser caught up to you!');
@@ -152,7 +162,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function startGame() {
     if (GAME_MODE !== 'chase') {
       timerElement.innerText = formatTime(timeLeft);
-      gameTimerInterval = setInterval(() => {//-------here
+      gameTimerInterval = setInterval(() => {
+        //-------here
         timeLeft--;
         timerElement.innerText = formatTime(timeLeft);
         if (timeLeft <= 0) {
@@ -163,13 +174,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 1000);
     }
 
+    if (GAME_MODE === 'race') {
+      startGhostRacer();
+    }
+
     if (GAME_MODE === 'chase') {
       const chaserSpeeds = {
         easy: 400,
         medium: 250,
         hard: 150,
       };
-      chaserSpeed = chaserSpeeds[GAME_DIFFICULTY] || 300;//-------here
+      chaserSpeed = chaserSpeeds[GAME_DIFFICULTY] || 300; //-------here
       startChaserLoop();
     }
   }
@@ -241,6 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function showEndModal(title, description) {
     if (gameTimerInterval) clearInterval(gameTimerInterval);
     if (chaserInterval) clearInterval(chaserInterval);
+    if (botInterval) clearInterval(botInterval);
     typeInput.disabled = true;
 
     savePlayerScore();
@@ -265,7 +281,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const char = userVal[index];
       span.className = '';
 
-      if (GAME_MODE === 'chase' && index <= chaserIndex) {//-------here
+      if (GAME_MODE === 'chase' && index <= chaserIndex) {
+        //-------here
         span.classList.add('char-chased');
       }
       if (char == null) {
@@ -291,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
         statMultiplier.innerText = `${currentMultiplier.toFixed(1)}X`;
 
         if (GAME_MODE === 'chase') {
-          chaserSpeed = Math.max(60, chaserSpeed - 40);//----here
+          chaserSpeed = Math.max(60, chaserSpeed - 40); //----here
           startChaserLoop();
         } else {
           currentLives = Math.max(0, currentLives - 1);
@@ -334,7 +351,15 @@ document.addEventListener('DOMContentLoaded', () => {
       currentPassageIndex++;
 
       if (currentPassageIndex >= passages.length) {
-        showEndModal('CHALLENGE COMPLETE', 'You conquered all passages!');
+        if (GAME_MODE === 'race') {
+          if (botInterval) clearInterval(botInterval);
+          showEndModal(
+            '1ST PLACE 🏆',
+            'VICTORY! You crossed the finish line ahead of the competition!'
+          );
+        } else {
+          showEndModal('CHALLENGE COMPLETE', 'You conquered all passages!');
+        }
         return;
       }
 
@@ -346,6 +371,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateArenaScroll();
   });
+
+  function startGhostRacer() {
+    const oppNameEl = document.getElementById('opponent-name');
+    const oppWpmEl = document.getElementById('opponent-wpm');
+    const oppBar = document.getElementById('opponent-progress-bar');
+    const botSpeeds = { easy: 45, medium: 68, hard: 92 };
+    botTargetWpm = botSpeeds[GAME_DIFFICULTY] || 50;
+
+    const randomName = botNames[Math.floor(Math.random() * botNames.length)];
+    if (oppNameEl) oppNameEl.innerText = `${randomName} (BOT)`;
+    if (oppWpmEl) oppWpmEl.innerText = botTargetWpm;
+
+    const msPerChar = 60000 / (botTargetWpm * 5);
+    const targetLength = passages[currentPassageIndex].length;
+
+    botInterval = setInterval(() => {
+      const jitter = (Math.random() - 0.5) * 0.3;
+      botCharsTyped += 1;
+
+      const progressPct = Math.min(100, Math.round((botCharsTyped / targetLength) * 100));
+      if (oppBar) oppBar.style.width = `${progressPct}%`;
+
+      if (botCharsTyped >= targetLength) {
+        clearInterval(botInterval);
+        if (typeInput.value.length < targetLength) {
+          typeInput.disabled = true;
+          showEndModal('2ND PLACE 🥈', `DEFEAT! ${randomName} crossed the finish line first.`);
+        }
+      }
+    }, msPerChar);
+  }
 
   typeInput.addEventListener('keydown', (e) => {
     if (e.key === 'Backspace' || e.key === 'Delete') {

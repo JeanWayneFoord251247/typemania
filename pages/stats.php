@@ -75,7 +75,7 @@ $global_stats_stmt = $conn->prepare("
 $global_stats_stmt->bind_param("i", $user_id);
 $global_stats_stmt->execute();
 $global_stats = $global_stats_stmt->get_result()->fetch_assoc();
-$global_stats_stmt->close(); //from line 51 to 63 we query aggregated metrics specifically for the logged-in user and fetches them as globa_stats
+$global_stats_stmt->close(); 
 
 $rank_query = $conn->query("
     SELECT user_id, MAX(points) AS top_score 
